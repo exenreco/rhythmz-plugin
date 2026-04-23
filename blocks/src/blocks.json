@@ -1,0 +1,20 @@
+{
+  "buildDir": "../build",
+  "blocks": [
+    {
+      "name": "rhythmz/three-d-block",
+      "folder": "three-d-block",
+      "output": "three-d-block"
+    },
+    {
+      "name": "rhythmz/popup-block",
+      "folder": "popup-block",
+      "output": "popup-block"
+    },
+    {
+      "name": "rhythmz/gallery-block",
+      "folder": "gallery-block",
+      "output": "gallery-block"
+    }
+  ]
+}

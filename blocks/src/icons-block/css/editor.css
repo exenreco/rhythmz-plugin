@@ -1,0 +1,27 @@
+.icons-block-tabs .components-tab-panel__tabs {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.icons-block-tabs .components-tab-panel__tabs button {
+  flex: 1 1 50%;        /* each tab takes 50% */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;             /* space between icon and text */
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid transparent;
+  background: none;
+  cursor: pointer;
+}
+
+.icons-block-tabs .components-tab-panel__tabs button.is-active {
+  border-bottom: 1px solid #0073e5; /* WordPress blue */
+}
+
+.icons-block-tabs .tab-title {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

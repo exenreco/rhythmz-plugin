@@ -1,0 +1,44 @@
+# IDE
+.vscode
+.antigravity
+.idea
+
+# Node dependency directories
+node_modules/
+*/node_modules
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# macOS files
+.DS_Store
+
+#ignore all files in temp folder
+temp/
+
+#ignore all files in build folder
+build/
+
+#ignore all files in dist folder
+dist/
+
+#ignore all files in vendor folder
+vendor/
+
+#ignore all files in uploads folder
+uploads/
+
+#ignore all files in cache folder
+cache/
+
+#ignore all files in logs folder
+logs/
+
+#ignore all files in tmp folder
+tmp/
+
+#ignore all files in .git folder
+.git/

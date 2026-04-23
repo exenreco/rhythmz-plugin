@@ -1,0 +1,56 @@
+{
+  "icon": "star-filled",
+  "name": "rhythmz/icons-block",
+  "title": "Icons Block",
+  "version": "1.0.0",
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "category": "text",
+  "apiVersion": 3,
+  "textdomain": "rhythmz",
+  "description": "Insert a single icon.",
+  "supports": {
+    "typography": {
+      "fontSize": false
+    }
+  },
+
+  "attributes": {
+    "blockClassName": {"type": "string"},
+    "icon": {
+      "type": "object",
+      "default": {
+        "gap": 0,
+        "type": "",
+        "size": 18,
+        "path": "",
+        "value": "",
+        "label": "",
+        "opacity": "1",
+        "fontSize": "",
+        "showLabel": false,
+        "alignment": "center",
+        "minHeight": "auto",
+        "textAlignment": "left",
+        "link": {
+          "url": "",
+          "newTab": false,
+          "hasLink": false
+        },
+        "colors": {},
+        "padding": {
+          "linked": true
+        },
+        "borders": {
+          "linked": true
+        },
+        "radius": {
+          "linked": true
+        }
+      }
+    }
+  },
+
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./css/editor.css",
+  "style": []
+}

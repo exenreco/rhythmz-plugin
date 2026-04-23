@@ -1,0 +1,25 @@
+.events-block {
+    gap: 10px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex: 0 0 auto;
+    min-height: 20em;
+    position: relative;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    justify-content: center;
+    overflow-x: hidden;
+}
+.events-block .__eb_inst_tar {
+    gap: 4px;
+    padding: none;
+    flex: 0 0 auto;
+    width: calc(100%);
+    height: calc(100%);
+    flex-direction: column;
+}
+.justify-left { text-align: left; }
+.justify-center { text-align: center; }
+.justify-right { text-align: right; }

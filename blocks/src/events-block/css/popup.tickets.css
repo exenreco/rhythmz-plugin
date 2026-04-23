@@ -1,0 +1,756 @@
+:root {
+    --pt-error-color: rgb(226, 87, 87);
+    --pt-warning-color: rgb(238, 104, 26);
+    --pt-success-color: rgb(122, 197, 138);
+    
+    --pt-text-color: #fff;
+    --border-color: #333;
+    --pt-date-text-color: rgb(226, 87, 87);
+    --pt-overlay-bg: rgba(0, 0, 0, 0.82);
+
+    --pt-details-text-color: #cccccc;
+    --pt-details-overlay-bg: rgba(33, 33, 33, 0.8);
+    --pt-details-background: rgba(44, 44, 44, 0.65);
+
+    --pt-add-to-cart-btn-bg: rgb(226, 87, 87);
+    --pt-add-to-cart-btn-text-color: #fff;
+
+    --pt-input-text-color: #fff;
+    --pt-input-bg-color: rgba(255, 255, 255, 0.1);
+    --pt-input-buttons-bg: rgb(206, 206, 206);
+    --pt-input-buttons-text-color: #000;
+}
+.__splicer_popup_module .__eb_ticket_popup {
+    z-index: 10;
+    color: var(--pt-text-color, #fff);
+}
+.__splicer_popup_module .__eb_ticket_popup > .__media {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+    transition: 1s ease;
+}
+.__splicer_popup_module .__eb_ticket_popup > .__media .__poster,
+.__splicer_popup_module .__eb_ticket_popup > .__media .__placeholder_wrapper,
+.__splicer_popup_module .__eb_ticket_popup > .__media .__placeholder_wrapper .__placeholder {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    filter: blur(45px);
+    -o-filter: blur(45px);
+    -ms-filter: blur(45px);
+    -moz-filter: blur(45px);
+    -webkit-filter: blur(45px);
+}
+.__splicer_popup_module .__eb_ticket_popup > .__media:after {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    content: "";
+    position: absolute;
+    backdrop-filter: blur(45px);
+    -o-backdrop-filter: blur(45px);
+    -ms-backdrop-filter: blur(45px);
+    -moz-backdrop-filter: blur(45px);
+    -webkit-backdrop-filter: blur(45px);
+    background: var(--pt-overlay-bg, rgba(0, 0, 0, 0.8));
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout {
+    z-index: 5;
+    margin: auto;
+    padding: 5px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: initial;
+    position: relative;
+    flex-direction: row;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    max-height: calc(100% - 10px);
+    max-width: calc(1480px - 10px);
+    min-width: calc(20% - 10px);
+    
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__left,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right {
+    height: auto;
+    display: flex;
+    position: relative;
+    align-items: start;
+    justify-items: left;
+    justify-content: left;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__left {
+    width: 35%;
+    align-items: start;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: center;
+    max-width: 35%;
+    min-width: 35%;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__left .__media {
+    width: 80%;
+    height: auto;
+    display: flex;
+    margin: 0px auto;
+    align-items: start;
+    justify-items: left;
+    justify-content: center;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__left .__media .__poster {
+    width: 100%;
+    height: auto;
+    display: block;
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0px auto;
+    object-fit: cover;
+    position: relative;
+    border-radius: 8px;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__left .__media .__placeholder_wrapper {
+    width: 80%;
+    height: 420px;
+    max-width: 80%;
+    min-width: 320px;
+    max-height: 420px;
+    min-height: 420px;
+    border-radius: 8px;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__left .__media .__placeholder_wrapper .__placeholder {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    border-radius: 8px;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__left .__media .__placeholder_wrapper .__placeholder .__inner:before {
+    border-radius: 8px;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right {
+    height: auto;
+    flex-direction: column;
+    width: calc(100% - 35%);
+    max-width: calc(100% - 35%);
+    min-width: calc(100% - 35%);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__header.event {
+    gap: 5px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    position: relative;
+    margin-bottom: 32px;
+    flex-direction: column;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__header.event .__venue_row {
+    gap: 0px;
+    padding: 0px;
+    display: flex;
+    flex: 0 0 auto;
+    position: relative;
+    align-items: start;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: left;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__header.event .__venue_row .__title,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__header.event .__venue_row .__logo {
+    margin: 0px;
+    height: auto;
+    padding: 0px;
+    line-height: 1.425rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__header.event .__venue_row .__logo {
+    width: 87px;
+    height: auto;
+    margin-right: 10px;
+    display: inline-block;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__header.event .__venue_row .__title {
+    height: 100%;
+    display: flex;
+    flex: 0 0 auto;
+    font-weight: 100;
+    font-size: 1.125rem;
+    align-items: center;
+    justify-items: left;
+    justify-content: left;
+    width: calc(100% - 120px);
+    color: var(--pt-text-color, #fff);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__header.event .__title {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 2.125rem;
+    text-transform: capitalize;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__header.event .__date {
+    width: 100%;
+    height: auto;
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 1.225rem;
+    color: var(--pt-date-text-color, red);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets {
+    gap: 8px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    max-width: 100%;
+    min-width: 100%;
+    align-items: start;
+    justify-items: left;
+    justify-content: left;
+    flex-direction: column;
+}
+/* ticket form */
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__no_ticket {
+    width: 100%;
+    padding: 5px;
+    margin: auto;
+    display: flex;
+    margin-top: 10px;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    font-size: 0.925rem;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+    backdrop-filter: blur(2px);
+    -o-backdrop-filter: blur(2px);
+    -ms-backdrop-filter: blur(2px);
+    -moz-backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    color: var(--pt-text-color, #fff);
+    background: var(--pt-details-background, rgba(44, 44, 44, 0.65));
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket {
+    width: 100%;
+    padding: 5px;
+    margin: auto;
+    display: flex;
+    align-items: start;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    justify-items: left;
+    justify-content: left;
+    flex-direction: column;
+    backdrop-filter: blur(2px);
+    -o-backdrop-filter: blur(2px);
+    -ms-backdrop-filter: blur(2px);
+    -moz-backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    background: var(--pt-details-background, rgba(44, 44, 44, 0.65));
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__header {
+    width: 98%;
+    margin: auto;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: start;
+    justify-items: left;
+    flex-direction: row;
+    line-height: 1.425rem;
+    justify-content: space-between;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__header .__title, .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__header .__low_stock {
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: inline-block;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__header .__title {
+    width: calc(100% - 100px);
+}
+ .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__header .__low_stock {
+    width: 100px;
+    font-weight: bold;
+    font-size: 0.852rem;
+    color: var(--pt-warning-color, rgb(238, 104, 26));
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__description {
+    width: 98%;
+    margin: auto;
+    display: flex;
+    flex: 0 0 auto;
+    color: var(--pt-details-text-color, #c0b9b9);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    align-items: start;
+    justify-items: left;
+    justify-content: left;
+    flex-direction: column;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__messages,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__messages.success,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__messages.error {
+    width: 98%;
+    display: flex;
+    flex: 0 0 auto;
+    max-width: 98%;
+    min-width: 98%;
+    margin: 10px auto;
+    font-weight: bold;
+    font-size: 0.925rem;
+    line-height: 1.025rem;
+    color: var(--pt-date-text-color, #fff);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__messages.success {
+    color: var(--pt-success-color, rgb(122, 197, 138));
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__messages.error {
+    color: var(--pt-error-color, rgb(216, 89, 89));
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__description {
+    margin-top: 5px;
+    line-height: 0.825;
+    font-weight:lighter;
+    font-size: 0.725rem;
+    align-items: start;
+    justify-items: left;
+    justify-content: left;
+    flex-direction: column;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__sold_out {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    position: absolute;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+    -o-backdrop-filter: blur(2px);
+    -ms-backdrop-filter: blur(2px);
+    -moz-backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    background-color: var(--pt-details-overlay-bg, rgba(33, 33, 33, 0.9));
+    color: var(--pt-error-color, rgb(216, 89, 89));
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container {
+    width: 98%;
+    margin: auto;
+    display: flex;
+    flex: 0 0 auto;
+    margin-top: 14px;
+    align-items: start;
+    justify-items: left;
+    justify-content: left;
+    flex-direction: row;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__left,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: start;
+    justify-items: left;
+    justify-content: left;
+    flex-direction: column;
+    width: calc(100% - 35%);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group {
+    width: 100%;
+    padding: 0px;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: start;
+    flex-direction: row;
+    justify-items: left;
+    justify-content: left;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group.heading {
+    text-align: center;
+    line-height: 0.825rem;
+    text-transform: uppercase;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group.heading i {
+    font-weight: bold;
+    font-style: normal;
+    font-size: 0.695rem;
+    color: var(--pt-details-text-color, #c0b9b9);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group.fields {
+    height: 4em;
+    align-items: center;
+    line-height: 1.025rem;
+    color: var(--pt-text-color, #fff);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group.fields i {
+    font-weight: bold;
+    font-style: normal;
+    font-size: 1.2rem;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group .__price,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group .__total {
+    width: 25%;
+    padding: 0px;
+    max-width: 7em;
+    min-width: 5em;
+    text-align: left;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group .__total {
+    text-align: right;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group .__multiplier {
+    width: 10%;
+    padding: 0px;
+    max-width: 2.5em;
+    min-width: 1.8em;
+    text-align: center;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group.fields .__multiplier i {
+    font-size: 0.725rem;
+    color: var(--pt-details-text-color, #c0b9b9);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group .__quantity {
+    width: 25%;
+    height: auto;
+    padding: 0px;
+    max-width: 15em;
+    min-width: 10em;
+    text-align: left;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group.fields .__quantity {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__quantity_container {
+    width: 100%;
+    height: auto;
+    padding: 0px;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__quantity_container button {
+    width: 4em;
+    height: 2em;
+    opacity: 1;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    color: var(--pt-input-buttons-text-color, #333);
+    background-color: var(--pt-input-buttons-bg-color, #e6e2e2);
+    transition: opacity 1s ease;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__quantity_container button:hover {
+    opacity: .8;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__quantity_container button.__decrement {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__quantity_container button.__increment {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__quantity_container input {
+    height: 2em;
+    border: none;
+    min-width: 5em;
+    font-size: 1.2rem;
+    text-align: center;
+    display: inline-block;
+    width: calc(100% - 8em);
+    color: var(--pt-input-text-color, #fff);
+    background-color: var(--pt-input-bg-color, #333);
+}
+
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right {
+    width: 35%;
+    height: 100%;
+    align-items: end;
+    justify-items: right;
+    justify-content: right;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right button,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right input[type="submit"] {
+    width: 95%;
+    opacity: 1;
+    margin: 0px;
+    border: none;
+    ;
+    max-width: 8em;
+    min-width: 5em;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    padding: .2rem 1rem;
+    border-radius: 999px;
+    display: inline-block;
+    transition: opacity 1s ease;
+    color: var(--pt-add-to-cart-btn-text-color, #fff);
+    background-color: var(--pt-add-to-cart-btn-bg-color, red);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right button:hover,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right input[type="submit"]:hover {
+    opacity: .4;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right button:disabled,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right input[type="submit"]:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__details {
+    width: 98%;
+    margin: 10px auto;
+    padding: 18px 0px;
+    border-top: 0.5px solid var(--border-color, #333);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__details .__details_title,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__details .__policy_title {
+    font-weight: 500;
+    font-size: 1.425rem;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__details .__policy_title {
+    font-size: 1.082rem;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__details .__policy_list,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__details .__policy_list li,
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__details .__details_text {
+    color: var(--pt-text-color, #fff);
+    font-size: 0.882rem;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__details .__details_text {
+    margin-bottom: 32px;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__venue {
+    gap: 5px;
+    width: 98%;
+    height: auto;
+    display: flex;
+    flex: 0 0 auto;
+    margin: 10px auto;
+    padding: 18px 0px;
+    border-radius: 8px;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    -o-backdrop-filter: blur(5px);
+    -ms-backdrop-filter: blur(5px);
+    -moz-backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: var(--pt-text-color, #fff);
+    background: var(--pt-details-background, rgba(44, 44, 44, 0.65));
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__venue .__venue_logo {
+    width: 98%;
+    margin: auto;
+    padding: 0px;
+    height: auto;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__venue .__venue_logo img {
+    width: 122px;
+    height: auto;
+    max-width: 122px;
+    min-width: 122px;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__venue .__venue_address {
+    width: 98%;
+    margin: auto;
+    padding: 0px;
+    height: auto;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    color: var(--pt-text-color, #fff);
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__venue .__venue_link {
+    width: 98%;
+    margin: auto;
+    padding: 0px;
+    height: auto;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__venue .__venue_link a {
+    opacity: 1;
+    font-weight: 100;
+    font-size: .825rem;
+    padding: .15rem 1rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: opacity .2s ease;
+    color: var(--pt-text-color, #fff);
+    border: 0.5px solid var(--pt-border-color, #e6e2e2);
+    background-color: var(--pt-details-background, rgba(33, 33,33, 1));
+}
+.__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__venue .__venue_link a:hover {
+    opacity: .5;
+}
+
+@media screen and (max-width: 880px) {
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__header .__title {
+        font-size: 0.925rem;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container {
+        flex-direction: column;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container {
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__left {
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right {
+        margin-top: 5px;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+    }
+}
+@media screen and (max-width: 780px) {
+    .__splicer_popup_module .__eb_ticket_popup .__layout {
+        width: 100%;
+        height: auto;
+        padding: 0px;
+        max-width: 100%;
+        min-width: 100%;
+        max-height: 100%;
+        overflow-y: auto;
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__left .__media {
+        width: auto;
+        height: 365px;
+        margin-bottom: 10px;
+        align-items: center;
+        justify-items: center;
+        justify-content: center;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__left .__media .__poster {
+        width: auto;
+        height: 360px;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__left {
+        width: 98%;
+        margin: auto;
+        max-width: 98%;
+        min-width: 98%;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right {
+        width: 98%;
+        margin: auto;
+        max-width: 98%;
+        min-width: 98%;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__left .__media .__placeholder_wrapper {
+        height: 360px;
+        max-height: 360px;
+        min-height: 360px;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container {
+        width: 98%;
+        margin: auto;
+        max-width: 98%;
+        min-width: 98%;
+        flex-direction: column;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__left,
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group {
+        width: 100%;
+        margin: auto;
+        max-width: 100%;
+        min-width: 100%;
+        align-items: center;
+        justify-items: center;
+        justify-content: center;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right {
+        width: 100%;
+        margin: auto;
+        max-width: 100%;
+        min-width: 100%;
+        margin-top: 5px;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group .__quantity {
+        width: 35%;
+        max-width: 14em;
+        min-width: 5em;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__quantity_container button {
+        width: 4em;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__quantity_container input {
+        width: calc(100% - 4em);
+        max-width: calc(100% - 4em);
+        min-width: calc(100% - 4em);
+    }
+    
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group.fields i {
+        font-size: 0.85rem;
+    }
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__field_group .__total i {
+        margin-right: 5px;
+    } 
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right button,
+    .__splicer_popup_module .__eb_ticket_popup .__layout > .__right .__tickets .__ticket .__section_container .__right input[type="submit"] {
+        font-size: 0.9rem;
+        margin: 5px 0px;
+        padding: 0.15rem 0.5rem;
+    }
+}

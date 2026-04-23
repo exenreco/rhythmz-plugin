@@ -1,0 +1,910 @@
+@keyframes tooltipOut {
+  from { top: 0px; }
+  to { top: 200px; }
+}
+@keyframes tooltipIn {
+  from { top: 200px; }
+  to { top: 0px; }
+}
+
+.__venue.map {
+  gap: 0px;
+  margin: auto;
+  height: auto;
+  display: flex;
+  flex: 0 0 auto;
+  position: relative;
+  flex-direction: column;
+  width: calc(100% - 10px);
+  max-width: calc(1480px - 10px);
+  min-width: calc(20% - 10px);
+}
+
+/** Toolbar
+*****************************************************************/
+.__venue.map .__toolbar.__venue_map {
+  width: 100%;
+  height: 5em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.5px solid #333;
+  background: rgba(33, 33, 33, 0.2);
+}
+.__venue.map .__toolbar.__venue_map .__left,
+.__venue.map .__toolbar.__venue_map .__right {
+  gap: 10px;
+  display: flex;
+  line-height: 1.5em;
+  flex-direction: row;
+}
+/** Details tool & Date Picker
+*** ---- See Date picker css for date picker styles
+*****************************************************************/
+.__venue.map .__toolbar.__venue_map .__left {
+  align-items: center;
+  justify-items: center;
+  justify-content: left;
+  width: calc(100% - 10em);
+}
+.__venue.map .__toolbar.__venue_map .__details_tool {
+  margin: 0;
+  padding: 0;
+  width: auto;
+  height: auto;
+  display: flex;
+  max-width: 5em;
+  min-width: 2em;
+  font-size: 1.02rem;
+  align-items: start;
+  justify-items: left;
+  flex-direction: column;
+  justify-content: left;
+}
+.__venue.map .__toolbar.__venue_map .__details_tool .__action {
+  margin: 0;
+  padding: 0;
+  width: 5em;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  position: relative;
+  font-size: 0.902rem;
+}
+.__venue.map .__toolbar.__venue_map .__details_tool .__action .__icon {
+  margin: 0;
+  padding: 0;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+}
+.__venue.map .__toolbar.__venue_map .__details_tool .__details.active {
+  display: block;
+  visibility: visible;
+}
+.__venue.map .__toolbar.__venue_map .__details_tool .__details {
+  width: auto;
+  margin: 0px;
+  padding: 5px;
+  z-index: 200;
+  display: none;
+  max-width: 20em;
+  min-width: 10em;
+  margin-top: 2.2em;
+  position: absolute;
+  visibility: hidden;
+  background: #555555;
+}
+.__venue.map .__toolbar.__venue_map .__details_tool .__details::before {
+  left: 0;
+  top: -14px;
+  content: "";
+  transform: none;
+  border-width: 8px;
+  position: absolute;
+  border-style: solid;
+  border-color: transparent;
+  transform: translateX(50%);
+  border-bottom-color: #555555;
+}
+.__venue.map .__toolbar.__venue_map .__details_tool .__details img {
+  width: 10em;
+  height: auto;
+}
+.__venue.map .__toolbar.__venue_map .__details_tool .__details .__title {
+  font-weight: bold;
+  font-size: 0.902rem;
+}
+/** View Toggle Tool
+*****************************************************************/
+.__venue.map .__toolbar.__venue_map .__right {
+  width: 10em;
+  align-items: end;
+  justify-items: right;
+  justify-content: right;
+}
+.__venue.map .__toolbar.__venue_map .__right .__view_toggle_tool {
+  margin: 5px;
+  padding: 2px;
+  width: 100px;
+  height: 32px;
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  font-style: normal;
+  line-height: normal;
+  border-radius: 999px;
+  border: 0.5px solid #aaaaaa;
+  background: rgba(227, 229, 232, 0.5);
+}
+.__venue.map .__toolbar.__venue_map .__right .__view_toggle_tool .__input[type=checkbox] {
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+  appearance: none;
+  position: absolute;
+}
+.__venue.map .__toolbar.__venue_map .__right .__view_toggle_tool .__input[type=checkbox]:checked + .__label:before {
+  translate: 100% 0;
+  border-radius: 999px;
+}
+.__venue.map .__toolbar.__venue_map .__right .__view_toggle_tool .__input[type=checkbox]:checked + .__label .option_list {
+  color: gray;
+}
+.__venue.map .__toolbar.__venue_map .__right .__view_toggle_tool .__input[type=checkbox]:checked + .__label .option_map {
+  color: #1a1a1a;
+}
+.__venue.map .__toolbar.__venue_map .__right .__view_toggle_tool .__input[type=checkbox] + .__label {
+  gap: 2px;
+  inset: var(--offset, 0);
+  padding: 10px 0;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+}
+.__venue.map .__toolbar.__venue_map .__right .__view_toggle_tool .__input[type=checkbox] + .__label:before {
+  inset: 0;
+  width: 50%;
+  content: "";
+  translate: 0 0;
+  position: absolute;
+  background: #fff;
+  border-radius: calc(999px - 4px);
+  box-shadow: 0px 10px 20px 0px rgba(16, 39, 68, 0.1);
+  transition: translate 250ms cubic-bezier(0.93, 0.26, 0.07, 0.69);
+}
+.__venue.map .__toolbar.__venue_map .__right .__view_toggle_tool .__input[type=checkbox] + .__label span {
+  width: 50%;
+  display: flex;
+  line-height: 1.5em;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  transition: 200ms linear;
+}
+.__venue.map .__toolbar.__venue_map .__right .__view_toggle_tool .__input[type=checkbox] + .__label .option_list {
+  color: #1a1a1a;
+}
+.__venue.map .__toolbar.__venue_map .__right .__view_toggle_tool .__input[type=checkbox] + .__label .option_map {
+  color: gray;
+}
+
+/** Cart
+*****************************************************************/
+.__venue.map .__cart {
+  top: -100vh;
+  left: 50%;
+  width: 90%;
+  padding: 5px;
+  height: 180px;
+  display: none;
+  z-index: 10001;
+  max-width: 500px;
+  visibility: hidden;
+  background: #111;
+  position: fixed;
+  border-radius: 8px;
+  align-items: start;
+  justify-items: left;
+  justify-content: left;
+  flex-direction: column;
+  border: 1px solid #333;
+  transform: translateX(-50%);
+  justify-content: space-between;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.__venue.map .__cart.show {
+  top: 2em;
+  display: flex;
+  visibility: visible;
+}
+.__venue.map .__cart .__toolbar.cart {
+  width: 100%;
+  border: none;
+  height: auto;
+  display: flex;
+  flex: 0 0 auto;
+  max-width: 100%;
+  min-width: 100%;
+  max-height: none;
+  min-height: none;
+  border-radius: 8px;
+  align-items: center;
+  flex-direction: row;
+  justify-items: center;
+  justify-content: right;
+  background-color: transparent;
+}
+.__venue.map .__cart .__toolbar.cart .__btn.__close {
+  width: 2em;
+  opacity: 1;
+  height: 2em;
+  display: flex;
+  cursor: pointer;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 0.2em;
+  justify-items: center;
+  justify-content: center;
+  background-color: red; 
+  transition: 500ms; 
+}
+.__venue.map .__cart .__toolbar.cart .__btn.__close:hover {
+  opacity: 0.5;
+  transform: rotate(90deg);
+}
+.__venue.map .__cart .__contents {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+}
+.__venue.map .__cart .__contents .__btn_container,
+.__venue.map .__cart .__contents .cart-info {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.__venue.map .__cart .__contents .cart-info {
+  gap: 5px;
+  align-items: start;
+  justify-items: left;
+  justify-content: left;
+  width: calc(100% - 10em);
+}
+.__venue.map .__cart .__contents .cart-info span {
+  width: 98%;
+  margin: auto;
+  display: flex;
+  align-items: start;
+  flex-direction: row;
+  justify-items: left;
+  justify-content: left;
+}
+.__venue.map .__cart .__contents .__btn_container {
+  width: 10em;
+}
+.__venue.map .__cart .__contents .__btn_container .__btn.__checkout {
+  width: 90%;
+  background: red;
+  border-width: 3px;
+  border-style: solid;
+  border-color: #fff;
+}
+
+/** Venue Map
+*****************************************************************/
+.__venue.map .__wrapper {
+  gap: 0px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  align-items: start;
+  flex-direction: row;
+  justify-items: left;
+  justify-content: left;
+  max-width: calc(1480px - 10px);
+  min-width: calc(20% - 10px);
+  min-height: calc(20% - 10px);
+}
+.__venue.map .__wrapper .__gutter {
+  width: 30em;
+  height: 100%;
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 0.5px solid #333;
+}
+.__venue.map .__wrapper .__gutter .__gutter_header {
+  width: 95%;
+  margin: auto;
+  height: auto;
+  display: flex;
+  flex: 0 0 auto;
+  text-align: left;
+  font-size: 1.02em;
+  font-weight: 600;
+  padding: 8px 0px;
+  align-items: start;
+  justify-items: left;
+  justify-content: left;
+  flex-direction: column;
+}
+.__venue.map .__wrapper .__gutter .__gutter_header::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  display: block;
+  margin: 5px 0px;
+  background: #333;
+}
+.__venue.map .__wrapper .__gutter .__vip_list {
+  gap: 14px;
+  width: 95%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex: 0 0 auto;
+  overflow: auto;
+  max-height: 920px;
+  padding: 10px 0px;
+  flex-direction: column;
+  list-style-type: none;
+}
+.__venue.map .__wrapper .__gutter .__vip_list .__list_item {
+  width: 98%;
+  margin: 0px;
+  height: auto;
+  padding: 5px;
+  display: flex;
+  flex: 0 0 auto;
+  font-weight: 500;
+  font-size: 0.82em;
+  align-items: center;
+  border-radius: 99px;
+  border-width: 0.5px;
+  border-style: solid;
+  justify-items: center;
+  justify-content: space-between;
+  color: #ffff;
+  border-color: #555555;
+}
+.__venue.map .__wrapper .__gutter .__vip_list .__list_item b {
+  margin-left: 5px;
+}
+.__venue.map .__wrapper .__gutter .__vip_list .__list_item.active {
+  display: flex;
+  cursor: pointer;
+  visibility: visible;
+}
+.__venue.map .__wrapper .__gutter .__vip_list .__list_item.inactive {
+  opacity: 0.5;
+  display: none;
+  visibility: hidden;
+}
+.__venue.map .__wrapper .__gutter .__vip_list .__list_item.__no_sections {
+  border: none;
+  margin: 0px auto;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  color: rgb(136, 132, 132);
+}
+.__venue.map .__wrapper .__map_area {
+  height: auto;
+  display: flex;
+  padding: 10px;
+  overflow: hidden;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  width: calc(100% - 30em);
+}
+.__venue.map .__wrapper .__map_area #booking_map {
+  width: 95%;
+  height: 95%;
+  margin: auto;
+  overflow: hidden;
+  max-height: 920px;
+  min-height: 520px;
+}
+
+/** Venue Map - Map View
+*****************************************************************/
+.__venue.map .__wrapper.map-view {
+  height: auto;
+  display: flex;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  max-height: none;
+  min-height: none;
+  flex-wrap: nowrap;
+  flex-direction: column-reverse;
+}
+.__venue.map .__wrapper.map-view .__map_area {
+  margin: auto;
+  width: 100%;
+  height: auto;
+}
+.__venue.map .__wrapper.map-view .__map_area #booking_map {
+  width: 95%;
+  height: 100%;
+  margin: auto;
+  overflow: hidden;
+  max-height: 480px;
+  min-height: 440px;
+}
+.__venue.map .__wrapper.map-view .__gutter {
+  width: 100%;
+}
+.__venue.map .__wrapper.map-view .__gutter .__vip_list {
+  gap: 10px;
+  width: 98%;
+  margin: auto;
+  height: auto;
+  overflow: none;
+  flex-wrap: wrap;
+  max-height: none;
+  min-height: none;
+  text-align: left;
+  align-items: start;
+  justify-items: left;
+  flex-direction: row;
+  justify-content: left;
+}
+.__venue.map .__wrapper.map-view .__gutter .__vip_list .__list_item {
+  margin: 10px;
+  position: relative;
+  width: calc(100% - 16.10px);
+  max-width: calc(340px - 16.10px);
+  min-width: calc(280px - 16.10px);
+}
+.__venue.map .__wrapper.map-view .__gutter .__vip_list .__list_item.__no_sections {
+  width: 98%;
+  margin: auto;
+  max-width: 98%;
+  min-width: 98%;
+  text-align: left;
+  justify-content: left;
+}
+
+
+
+
+
+@media (max-width: 1453px) {
+  .__venue.map .__wrapper.map-view .__gutter .__vip_list  {
+    gap: 14px;
+  }
+  .__venue.map .__wrapper.map-view .__gutter .__vip_list .__list_item {
+    margin: auto;
+    position: relative;
+    width: calc(100% - 16.10px);
+    max-width: calc(440px - 16.10px);
+    min-width: calc(380px - 16.10px);
+  }
+}
+
+@media (max-width: 1345px) {
+  .__venue.map .__wrapper.map-view .__gutter .__vip_list  {
+    gap: 14px;
+  }
+  .__venue.map .__wrapper.map-view .__gutter .__vip_list .__list_item {
+    margin: auto;
+    position: relative;
+    width: calc(100% - 16.10px);
+    max-width: calc(50% - 16.10px);
+    min-width: calc(50% - 16.10px);
+  }
+}
+@media (max-width: 1024px) {
+  /* List View */
+  .__venue.map .__wrapper.map-view .__gutter {
+    border-right: none;
+  }
+  .__venue.map .__wrapper,
+  .__venue.map .__wrapper.list-view {
+    flex-wrap: wrap;
+  }
+  .__venue.map .__wrapper .__gutter,
+  .__venue.map .__wrapper.list-view .__gutter {
+    width: 100%;
+    height: auto;
+  }
+  .__venue.map .__wrapper .__gutter .__vip_list,
+  .__venue.map .__wrapper.list-view .__gutter .__vip_list {
+    height: auto;
+    flex-wrap: wrap;
+    max-height: none;
+    min-height: none;
+    align-items: start;
+    justify-items: left;
+    flex-direction: row;
+    justify-content: left;
+  }
+  .__venue.map .__wrapper .__gutter .__vip_list .__list_item,
+  .__venue.map .__wrapper.list-view .__gutter .__vip_list .__list_item {
+    margin: 0px;
+    position: relative;
+    width: calc(50% - 16.10px);
+    max-width: calc(50% - 16.10px);
+    min-width: calc(50% - 16.10px);
+  }
+  .__venue.map .__wrapper .__map_area,
+  .__venue.map .__wrapper.list-view .__map_area {
+    margin: auto;
+    width: 100%;
+    height: auto;
+  }
+  .__venue.map .__wrapper .__map_area #booking_map,
+  .__venue.map .__wrapper.list-view .__map_area #booking_map {
+    width: 95%;
+    height: 100%;
+    margin: auto;
+    overflow: hidden;
+    max-height: 480px;
+    min-height: 440px;
+  }
+}
+
+@media (max-width: 780px) {
+  .__venue.map .__wrapper.map-view .__gutter {
+    border-right: none;
+  }
+  /* List View */
+  .__venue.map .__wrapper.list-view .__gutter .__vip_list .__list_item {
+    margin: auto;
+    position: relative;
+    width: calc(100% - 16.10px);
+    max-width: calc(100% - 16.10px);
+    min-width: calc(100% - 16.10px);
+  }
+  /* Map View */
+  .__venue.map .__wrapper.map-view .__gutter .__vip_list  {
+    gap: 14px;
+  }
+  .__venue.map .__wrapper.map-view .__gutter .__vip_list .__list_item {
+    margin: auto;
+    position: relative;
+    width: calc(100% - 16.10px);
+    max-width: calc(100% - 16.10px);
+    min-width: calc(100% - 16.10px);
+  }
+}
+
+@media (max-width: 375px) {
+  .__venue.map .__wrapper.map-view .__gutter {
+    border-right: none;
+  }
+  /* List View */
+  .__venue.map .__wrapper.list-view .__gutter .__vip_list .__list_item {
+    margin: auto;
+    position: relative;
+    width: calc(100% - 16.10px);
+    max-width: calc(100% - 16.10px);
+    min-width: calc(100% - 16.10px);
+  }
+  /* Map View */
+  .__venue.map .__toolbar.__venue_map .__details_tool .__details .__title,
+  .__venue.map .__toolbar.__venue_map .__details_tool .__details .__title p {
+    font-size: 0.85rem;
+  }
+}
+
+
+
+
+/* Tooltip Base */
+.__tooltip {
+  position: absolute;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  font-family: sans-serif;
+  min-width: 120px;
+}
+
+/* The Caret (The Triangle) */
+.__tooltip::after {
+  content: "";
+  position: absolute;
+  border-width: 8px;
+  border-style: solid;
+}
+
+/* Focus Mode: Arrow points DOWN to the section */
+.__tooltip.focus-mode::after {
+  top: 100%; /* Bottom of tooltip */
+  left: 50%;
+  transform: translateX(-50%);
+  border-color: #1a1a1a transparent transparent transparent;
+}
+
+/* Mouse Mode: Typically no arrow, or a side arrow */
+.__tooltip.mouse-mode::after {
+  display: none; /* Usually cleaner for mouse-follow */
+}
+
+/* Collision adjustment: If we flip the tooltip, move the arrow */
+.__tooltip.flipped::after {
+  left: auto;
+  right: 20px; /* Keep arrow over the mouse if box shifted left */
+  transform: none;
+}
+
+#__eb_tooltip .name,
+#__eb_tooltip .price, 
+#__eb_tooltip .guests {
+  display: block;
+  font-size: 14px;
+  position: relative;
+}
+
+
+.__venue {
+  margin: auto;
+  padding: 5px;
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+}
+
+/* Venue view strip 
+==========================================================================================*/
+/*.__venue .__strip {
+  width: 100%;
+  height: 5em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(33, 33, 33, 0.2);
+}
+.__venue .__strip .__view_toggle {
+  margin: 5px;
+  padding: 2px;
+  width: 120px;
+  height: 32px;
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  font-style: normal;
+  line-height: normal;
+  border-radius: 999px;
+  border: 0.5px solid #aaaaaa;
+  background: rgba(227, 229, 232, 0.5);
+}
+.__view_toggle .__input[type=checkbox] {
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+  appearance: none;
+  position: absolute;
+}
+.__view_toggle .__input[type=checkbox]:checked + .__label:before {
+  translate: 100% 0;
+  border-radius: 999px;
+}
+.__view_toggle .__input[type=checkbox]:checked + .__label .option_list {
+  color: gray;
+}
+.__view_toggle .__input[type=checkbox]:checked + .__label .option_map {
+  color: #1a1a1a;
+}
+.__view_toggle .__input[type=checkbox] + .__label {
+  position: absolute;
+  inset: var(--offset, 0);
+  padding: 10px 0;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  display: grid;
+  gap: 2px;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  place-items: center;
+}
+.__view_toggle .__input[type=checkbox] + .__label:before {
+  inset: 0;
+  width: 50%;
+  content: "";
+  translate: 0 0;
+  position: absolute;
+  background: #fff;
+  border-radius: calc(999px - 4px);
+  box-shadow: 0px 10px 20px 0px rgba(16, 39, 68, 0.1);
+  transition: translate 250ms cubic-bezier(0.93, 0.26, 0.07, 0.69);
+}
+.__view_toggle .__input[type=checkbox] + .__label span {
+  position: relative;
+  transition: 200ms linear;
+}
+.__view_toggle .__input[type=checkbox] + .__label .option_list {
+  color: #1a1a1a;
+}
+.__view_toggle .__input[type=checkbox] + .__label .option_map {
+  color: gray;
+}
+*/
+
+/*.__venue {
+  position: relative;
+  display: block;
+  margin: auto;
+  width: calc(100% - 10px);
+  max-width: calc(1480px - 10px);
+  min-width: calc(20% - 10px);
+}
+.__venue .__wrapper,
+.__venue .__wrapper.list-view {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: start;
+  flex-direction: row;
+  justify-content: right;
+  height: calc(100% - 5em);
+}
+.__venue .__wrapper .__gutter,
+.__venue .__wrapper.list-view .__gutter {
+  width: 30em;
+  height: auto;
+  max-height: 100%;
+  min-height: 30em;
+  margin-bottom: 5px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.__venue .__wrapper .__gutter .__vip_list,
+.__venue .__wrapper.list-view .__gutter .__vip_list {
+  width: 95%;
+  margin: auto;
+  padding: 0px;
+  display: flex;
+  flex: 0 0 auto;
+  text-align: left;
+  font-weight: bold;
+  align-items: center;
+  font-size: 0.785rem;
+  list-style-type: none;
+  flex-direction: column;
+  justify-content: center;
+  letter-spacing: 0.046rem;
+}
+.__venue .__wrapper .__gutter .__vip_list .__vip,
+.__venue .__wrapper.list-view .__gutter .__vip_list .__vip {
+  display: flex;
+  flex: 0 0 auto;
+  cursor: pointer;
+  flex-wrap: nowrap;
+  align-items: start;
+  flex-direction: row;
+  border-style: solid;
+  border-radius: 999px;
+  border-width: 0.05px;
+  border-color: #464646;
+  padding: 4px 8px 4px 8px;
+  margin: 6px auto 6px auto;
+  width: calc(100% - 16.10px);
+  height: calc(100% - 8.10px);
+  justify-content: space-between;
+  transition: background-color 500ms cubic-bezier(0.93, 0.26, 0.07, 0.69);
+}
+.__venue .__wrapper .__gutter .__vip_list .__vip * {
+  margin: auto 2px auto 2px;
+}
+.__venue .__wrapper .__gutter .__vip_list .__vip.active {
+  display: flex;
+  visibility: visible;
+}
+.__venue .__wrapper .__gutter .__vip_list .__vip.inactive {
+  display: none;
+  visibility: hidden;
+}
+.__venue .__wrapper .__gutter .__vip_list .__vip:hover,
+.__venue .__wrapper.list-view .__gutter .__vip_list .__vip:hover,
+.__venue .__wrapper.map-view .__gutter .__vip_list .__vip:hover {
+  color: #fff;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(33, 33, 33, 0.2);
+  transition: background-color 500ms cubic-bezier(0.93, 0.26, 0.07, 0.69);
+}
+.__venue .__wrapper .__content,
+.__venue .__wrapper.list-view .__content {
+  height: 100%;
+  display: flex;
+  flex: 0 0 auto;
+  position: relative;
+  align-items: start;
+  flex-direction: row;
+  justify-content: center;
+  width: calc(100% - 30em);
+}
+.__venue .__wrapper .__content #booking_map,
+.__venue .__wrapper.list-view .__content #booking_map {
+  height: auto;
+  display: block;
+  position: relative;
+  margin: 14px auto 14px auto;
+  width: calc(96% - 24px);
+}
+/*.__venue .__wrapper .__content #booking_map .__path.__focused,
+.__venue .__wrapper.list-view .__content #booking_map.__focused {
+  stroke-width: 2px;
+  fill: rgba(81, 255, 0, 0.774);
+  stroke: rgba(0, 255, 78, 1);
+  transition: all 500ms cubic-bezier(0.93, 0.26, 0.07, 0.69);
+}
+.__venue .__wrapper .__content #booking_map .__path.__blur,
+.__venue .__wrapper.list-view .__content #booking_map.__blur {
+  stroke-width: 2px;
+  fill: rgba(76, 202, 26, 0.4);
+  stroke: rgba(76, 202, 26, 0.4);
+  transition: all 500ms cubic-bezier(0.93, 0.26, 0.07, 0.69);
+}*/
+
+/*.__venue .__wrapper.map-view {
+  flex-direction: column-reverse;
+}
+.__venue .__wrapper.map-view .__gutter,
+.__venue .__wrapper.map-view .__content {
+  width: 100%;
+  height: auto;
+}
+.__venue .__wrapper.map-view .__content {
+  height: 75%;
+  max-height: 75%;
+  min-height: 25em;
+}
+.__venue .__wrapper.map-view .__content #booking_map {
+  height: 95%;
+  width: auto;
+}
+.__venue .__wrapper.map-view .__gutter .__vip_list {
+  flex-wrap: wrap;
+  text-align: left;
+  align-items: start;
+  justify-items: left;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.__venue .__wrapper.map-view .__gutter .__vip_list .__vip {
+  margin: 8px;
+  position: relative;
+  width: calc(100% - 16.10px);
+  max-width: calc(340px - 16.10px);
+  min-width: calc(280px - 16.10px);
+}*/

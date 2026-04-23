@@ -1,0 +1,54 @@
+{
+  "name": "@rhythmz/blocks-root",
+  "type": "module",
+  "main": "src/block.json",
+  "author": "",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": [],
+  "workspaces": [
+    "./*"
+  ],
+  "description": "",
+  "scripts": {
+    "build": "webpack --config webpack.config.mjs",
+    "watch": "webpack --config webpack.config.mjs --watch",
+    "wp-scripts-build": "wp-scripts build --webpack-copy-php",
+    "wp-scripts-start": "wp-scripts start --webpack-copy-php",
+    "wp-scripts-lint-js": "wp-scripts lint-js",
+    "wp-scripts-lint-css": "wp-scripts lint-css",
+    "wp-scripts-format": "wp-scripts format"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "@wordpress/dependency-extraction-webpack-plugin": "^6.33.0",
+    "@wordpress/scripts": "^31.3.0",
+    "babel-loader": "^9.2.1",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^6.10.0",
+    "fast-glob": "^3.3.3",
+    "mini-css-extract-plugin": "^2.8.1",
+    "sass": "^1.72.0",
+    "sass-loader": "^14.1.1",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/free-brands-svg-icons": "^7.1.0",
+    "@fortawesome/free-regular-svg-icons": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/react-fontawesome": "^3.1.1",
+    "@wordpress/icons": "^11.1.0",
+    "core-js": "^3.46.0",
+    "date-fns": "^4.1.0",
+    "swiper": "^12.0.3",
+    "three": "^0.181.0"
+  }
+}

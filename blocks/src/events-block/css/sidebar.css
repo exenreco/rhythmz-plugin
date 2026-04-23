@@ -1,0 +1,257 @@
+.events-block-tools-panel .color-control-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  padding: 4px 0;
+}
+
+.color-swatch-button {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 50%;
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid #ddd !important;
+}
+
+.color-label {
+  flex: 1;
+  font-size: 13px;
+}
+
+.color-options-row,
+.gradient-options-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.color-circle,
+.gradient-swatch {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50%;
+  border: 1px solid #ccc !important;
+}
+
+
+/*Sidebar Separator*/
+.events-block-separator {
+  height: 1px;
+  width: 100%;
+  margin: 1.2em 0 1.2em 0;
+  background-color: #ccc;
+}
+
+/*Appearance Buttons*/
+.appearance-btns .appearance-icon {
+  padding: 0;
+  margin: auto;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+}
+.appearance-btns .appearance-icon svg {
+  margin: 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+
+
+/** Events Block Sidebar [Other Slides]
+############################################################################*/
+.add-slide-button {
+  
+  padding: 16px;
+  display: flex;
+  flex: 0 0 auto;
+  border-radius: 5px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 32px);
+  max-width: calc(100% - 32px);
+  min-width: calc(100% - 32px);
+  margin: 2em auto 2em auto;
+}
+.add-slide-button svg {
+  fill: #fff;
+  width: 32px;
+  height: 32px;
+}
+
+.slide-item {
+  width: 100%;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.4em auto 0.4em auto;
+}
+.slide-item .panel-header {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex: 0 0 auto;
+  max-width: 100%;
+  min-width: 100%;
+  font-weight: bold;
+  align-items: left;
+  line-height: 1.2rem;
+  flex-direction: row;
+  justify-items: left;
+  justify-content: left;
+  border-bottom: 1px solid #918e8e;
+  background-color: #ffff;
+}
+.slide-item .panel-header .tool.toggle {
+  display: flex;
+  flex: 0 0 auto;
+  cursor: pointer;
+  flex-direction: row;
+  align-items: center;
+  line-height: 1.2rem;
+  justify-content: center;
+  width: calc(100% - 2.4em);
+  max-width: calc(100% - 2.4em);
+  min-width: calc(100% - 2.4em);
+}
+.slide-item .panel-header .tool.remove {
+  width: 2.4em;
+  max-width: 2.4em;
+  min-width: 2.4em;
+  border-left: 1px solid #918e8e;
+}
+.slide-item .panel-header .tool.remove svg {
+  fill: #fff;
+}
+.slide-item .panel-header .tool .icon {
+  opacity: 0.5;
+  width: 2.4em;
+  max-width: 2.4em;
+  min-width: 2.4em;
+  height: 2.4em;
+  max-height: 2.4em;
+  min-height: 2.4em;
+}
+.slide-item .panel-header .tool .text {
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: calc(100% - 3.5em);
+  max-width: calc(100% - 3.5em);
+  min-width: calc(100% - 3.5em);
+}
+.slide-item .panel-editor {
+  display: flex;
+  flex: 0 0 auto;
+  padding: 0.4em;
+  flex-direction: column;
+  justify-content: center;
+  width: calc(100% - 0.8em);
+}
+.slide-item .panel-editor .media-preview {
+  margin: .5em auto;
+  height: 10em;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 10em;
+  min-height: 10em;
+  overflow: hidden;
+}
+.slide-item .panel-editor .media-preview:has(img),
+.slide-item .panel-editor .media-preview:has(video) {
+  background-color: #dbe7fc;
+}
+.slide-item .panel-editor .media-preview:has(.null) {
+  background-color: #333; /* A light background color */
+  background-image: 
+    linear-gradient(45deg, #ccc 25%, transparent 25%),
+    linear-gradient(-45deg, #ccc 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #ccc 75%),
+    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+  background-size: 40px 40px; /* Adjust the size of the checkers */
+  background-position: 0 0, 0 20px, 20px -20px, 20px 0px;
+}
+.slide-item .panel-editor .media-preview img,
+.slide-item .panel-editor .media-preview video {
+  width: 100%;
+  height: auto;
+  margin: auto;
+  max-width: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  text-align: center;
+}
+.slide-item .panel-editor .media-preview .null {
+  margin: auto;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 10em;
+  min-height: 10em;
+  overflow: hidden;
+  color: #fff;
+  font-weight: bold;
+  background-color: rgba(186, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.slide-item .panel-editor .upload-button {
+  margin: auto;
+  padding: 16px;
+  display: flex;
+  flex: 0 0 auto;
+  cursor: pointer;
+  flex-direction: row;
+  align-items: center;
+  line-height: 1.2rem;
+  justify-items: center;
+  width: calc(100% - 0.8em);
+  max-width: calc(100% - 0.8em);
+  min-width: calc(100% - 0.8em);
+  justify-content: center;
+}
+.slide-item .panel-editor .upload-button svg {
+  fill: #007cba;
+  width: 24px;
+  height: 24px;
+}
+.slide-item .panel-editor label {
+  text-transform: capitalize !important;
+}
+.slide-item .panel-editor .or {
+  padding: 0.4em 0.6em 0.4em auto;
+  text-align: center;
+  margin: 0.4em auto 0.4em auto;
+  width: calc(100% - 0.8em);
+  max-width: calc(100% - 0.8em);
+  min-width: calc(100% - 0.8em);
+}

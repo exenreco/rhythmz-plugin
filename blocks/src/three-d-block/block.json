@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+
+  "name": "rhythmz/three-d-block",
+  "title": "3D Block",
+
+  "category": "text",
+  "icon": "smiley",
+
+  "attributes": {
+    "isEditor":     { "type": "boolean", "default": true },
+    "gltfPath":     { "type": "string", "default": ""},
+    "entryFile":    { "type": "string", "default": "scene.gltf" },
+    "dracoPath":    { "type":"string", "default": "my/dracoPath/"},
+    "showControls": { "type": "boolean", "default": true }
+  },
+
+  "supports": {},
+
+  "style": "file:./css/frontend.css",
+  "editorStyle": "file:./css/editor.css",
+
+  "script": [
+    "file:./libs/asset.js",
+    "file:./js/frontend.js"
+  ],
+  "editorScript": [
+    "file:./libs/asset.js",
+    "file:./index.js"
+  ]
+}
