@@ -1,7 +1,7 @@
 import Swiper from 'swiper/bundle';
 import { Layouts } from './layouts.js';
 import { isValidObject } from './utils.js';
-import { bookingTemplate } from "../../../assets/js/venue_map_svg.js";
+import { initBookingApp } from "../../../assets/js/venue_map_svg.js";
 import { eventCarousel } from "./events.carousel.js";
 import { EventsBlog } from './events.blog.js';
 import { registerDefaultIcons } from "../../../assets/js/icons.default.js";
@@ -187,7 +187,7 @@ const Setup = ({ block, swiperRef, attributes, otherSlides, calendarData }) => {
       bookingContainer: () => {
         const temp = document.createElement("div");
         temp.classList.add('__eb_booking', 'in_page');
-        temp.append(bookingTemplate());
+        temp.append(initBookingApp());
 
         /*const fragment = document.createDocumentFragment();
         fragment.append(temp);
@@ -296,7 +296,7 @@ const Setup = ({ block, swiperRef, attributes, otherSlides, calendarData }) => {
           })(),
           {
             id: "test2",
-            itemsPerPage: 1,
+            itemsPerPage: 12,
             styles: {
               bgColor: "red",
               textColor: "blue",

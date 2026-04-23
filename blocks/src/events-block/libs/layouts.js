@@ -7,7 +7,7 @@ import '../css/slider.css';
 import {
   registerTemplate
 } from "../../../assets/js/popup.js";
-import { bookingTemplate } from "../../../assets/js/venue_map_svg.js";
+import { initBookingApp } from "../../../assets/js/venue_map_svg.js";
 
 const venueTemplate = registerTemplate('<test>');
 
@@ -1081,7 +1081,7 @@ const layouts = {
                   e.target.popup(
                     "fullWidth",
                     "Booking - VIP Suites ",
-                    bookingTemplate(),
+                    initBookingApp(),
                   ),
                 );
 

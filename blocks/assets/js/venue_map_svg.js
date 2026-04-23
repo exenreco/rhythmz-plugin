@@ -222,6 +222,8 @@ const // 1. Centralized Data (Only one place to edit)
     currentFocus: null,
     focusedElements: [],
     template: null,
+    CURRENT_CONFIG: [],
+    CURRENT_EVENT_ID: null,
   },
   generateTooltipContent = (path) => {
     const name = path.getAttribute("data-name") || "",
@@ -379,15 +381,13 @@ const // 1. Centralized Data (Only one place to edit)
   updateCartUI = () => {
     if (!State.venueId) return;
 
-    const 
-    template = State.template,
-    { cart, cartCount, cartTotal } = template;
+    const template = State.template,
+      { cart, cartCount, cartTotal } = template;
 
     if (!cartCount || !cartTotal) return;
 
-    const 
-    itemCount = State.cart.size,
-    items = Array.from(State.cart.values());
+    const itemCount = State.cart.size,
+      items = [...State.cart.values()];
 
     if (itemCount > 0) {
       cartCount.textContent = `${
@@ -661,6 +661,25 @@ const // 1. Centralized Data (Only one place to edit)
    * @author Exenreco Bell
    */
   bookingTools = {
+    getEarliestEventID: () => {
+      const 
+      now = Date.now(),
+      events = window?.RhythmzEventsBlockData?.events || {};
+
+      const closest = Object.values(events).reduce((closest, event) => {
+        const time = new Date(event.startDate).getTime();
+
+        if (!closest) return event;
+
+        const closestTime = new Date(closest.startDate).getTime();
+
+        return Math.abs(time - now) < Math.abs(closestTime - now)
+          ? event
+          : closest;
+      }, null);
+
+      return closest?.id ?? null;
+    },
     /**
      * Generate map configuration
      *
@@ -765,6 +784,7 @@ const // 1. Centralized Data (Only one place to edit)
             const [foundID, foundData] = match;
 
             if (foundID !== eventID) {
+              State.CURRENT_EVENT_ID = foundID;
               // Just call the function. It handles the DOM replacement internally.
               renderBookingApp(selector, foundID);
             }
@@ -926,8 +946,8 @@ const // 1. Centralized Data (Only one place to edit)
       return viewToggle;
     },
   },
-  updateVenueMap = (MAP_CONFIG) => {
-    MAP_CONFIG.forEach((item) => {
+  updateVenueMap = (CURRENT_CONFIG) => {
+    CURRENT_CONFIG.forEach((item) => {
       const paths = State.paths.get(item.id);
 
       // If path doesn't exist (new item), skip or create
@@ -942,21 +962,20 @@ const // 1. Centralized Data (Only one place to edit)
         p.dataset.quantity = item.quantity;
         p.dataset.capacity = item.capacity;
 
-        // Toggle active/inactive
-        p.classList.toggle("active", isActive);
-        p.classList.toggle("inactive", !isActive);
-
-        // Remove selection if it became unavailable
-        if (!isActive) {
-          p.classList.remove("__selected");
-          State.cart.delete(item.id);
+        if (parseInt(item.quantity) >= 1) {
+          p.classList.add("active");
+          p.classList.remove("inactive");
+        } else {
+          p.classList.add("inactive");
+          p.classList.remove("active");
+          p.classList.remove("__selected"); // Deselect if sold out
         }
       });
     });
 
     updateCartUI();
   },
-  buildVipList = (MAP_CONFIG) => {
+  buildVipList = (CURRENT_CONFIG) => {
     const list = document.createElement("ul");
     list.classList.add("__vip_list");
 
@@ -971,7 +990,7 @@ const // 1. Centralized Data (Only one place to edit)
     chevronWrapper.classList.add("chevron");
     chevronWrapper.appendChild(chevron);
 
-    MAP_CONFIG.forEach((vip, index) => {
+    CURRENT_CONFIG.forEach((vip, index) => {
       const isAvailable = parseInt(vip.quantity) >= 1;
 
       // OPTIONAL: If you want to hide sold-out items from the list entirely,
@@ -1017,7 +1036,7 @@ const // 1. Centralized Data (Only one place to edit)
 
     list.addEventListener("click", (e) => {
       const li = e.target.closest(".__vip.active"); // Only select active items
-      if (li) selectPath(MAP_CONFIG, li.id.replace("vip-", ""));
+      if (li) selectPath(CURRENT_CONFIG, li.id.replace("vip-", ""));
     });
 
     return list;
@@ -1030,18 +1049,14 @@ const // 1. Centralized Data (Only one place to edit)
   /**
    * Booking template
    *
-   * @param {Array} MAP_CONFIG - the configuration of the map && its paths
-   *
-   * @param {String} eventID - the ID of the event to render the map view for
-   *
    * @returns {Node}
    *
    * @since 1.0.0
    *
    * @author Exenreco Bell
    */
-  bookingTemplate = (MAP_CONFIG = [], eventID) => {
-    if (!MAP_CONFIG) return;
+  bookingTemplate = () => {
+    let { CURRENT_CONFIG, CURRENT_EVENT_ID } = State;
 
     const uniqueId = `venue_map_${generateSecureUniqueNumber()}`;
     State.venueId = uniqueId;
@@ -1056,11 +1071,11 @@ const // 1. Centralized Data (Only one place to edit)
 
     const gutter = document.createElement("div");
     gutter.classList.add("__gutter");
-    gutter.append(gutterHeader, buildVipList(MAP_CONFIG));
+    gutter.append(gutterHeader, buildVipList(CURRENT_CONFIG));
 
     const content = document.createElement("div");
     content.classList.add("__content", "__map_area");
-    content.append(venueMap(MAP_CONFIG));
+    content.append(venueMap(CURRENT_CONFIG));
 
     const zoomerInstance = new ImageZoomer(content);
 
@@ -1074,8 +1089,8 @@ const // 1. Centralized Data (Only one place to edit)
 
     const toolbarLeft = document.createElement("div");
     toolbarLeft.classList.add("__left");
-    toolbarLeft.append(bookingTools.dateTool(`#${uniqueId}`, eventID));
-    toolbarLeft.append(bookingTools.detailsTool(eventID));
+    toolbarLeft.append(bookingTools.dateTool(`#${uniqueId}`, CURRENT_EVENT_ID));
+    toolbarLeft.append(bookingTools.detailsTool(CURRENT_EVENT_ID));
 
     const toolbarRight = document.createElement("div");
     toolbarRight.classList.add("__right");
@@ -1135,20 +1150,38 @@ const // 1. Centralized Data (Only one place to edit)
     template.addEventListener("click", (e) => {
       const tempBtn = e.target.closest("button");
       if (!tempBtn) return;
+
       if (tempBtn.classList.contains("__close")) {
         e.preventDefault();
         e.stopImmediatePropagation();
+
         if (template._ref.cart.classList.contains("show")) {
-          // close cart
+          // 1. Hide the cart UI
           template._ref.cart.classList.remove("show");
+
+          // 2. Clear the cart data
           State.cart.clear();
-          State.paths.clear();
+
+          // 3. RESTORE MAP STATE
+          // Instead of forcing everything to "inactive" (which hides them),
+          // we re-run the update logic using the current event's configuration.
+          // This restores the "active" class to sections that have quantity.
+          updateVenueMap(State.CURRENT_CONFIG);
+
+          // 4. Reset the Sidebar List (Gutter)
+          const listItems = template.querySelectorAll(".__vip.__list_item");
+          listItems.forEach((li) => {
+            li.classList.remove("__selected");
+          });
+
+          // 5. Update UI
+          updateCartUI();
         }
       } else if (tempBtn.classList.contains("__checkout")) {
         e.preventDefault();
         e.stopImmediatePropagation();
         venueCheckout();
-      } else return;
+      }
     });
 
     return template;
@@ -1157,31 +1190,35 @@ const // 1. Centralized Data (Only one place to edit)
     const container = document.querySelector(containerSelector);
     if (!container) return;
 
+    // 1. Update the Global State
     const eventMapConfig = bookingTools.generateMapConfig(eventID);
+    State.CURRENT_CONFIG = eventMapConfig;
+    State.CURRENT_EVENT_ID = eventID;
 
-    // 1. Clear Map State
-    State.paths.clear();
+    // 2. Check if the container IS the venue or CONTAINS the venue
+    let venueApp = container.querySelector(".__venue");
 
-    const prevCart = new Map(State.cart);
-    State.cart.clear();
+    /*const prevCart = new Map(State.cart);
 
-    // after rebuild
+    // 4. after rebuild
     prevCart.forEach((item, id) => {
       if (State.paths.has(id)) {
         State.cart.set(id, item);
         State.paths.get(id).forEach((p) => p.classList.add("__selected"));
       }
-    });
-
-    // 2. Check if the container IS the venue or CONTAINS the venue
-    let venueApp = container.querySelector(".__venue");
+    });*/
 
     if (!venueApp) {
+      // INITIAL LOAD: Clear and build from scratch
+      State.paths.clear();
+      State.cart.clear();
+
       // INITIAL LOAD: Pass the original containerSelector down
-      venueApp = bookingTemplate(eventMapConfig, eventID, containerSelector);
-      State.venueId = venueApp._ref.venueId;
-      State.template = venueApp._ref;
-      container.parentElement.replaceChildren(venueApp);
+      venueApp = bookingTemplate();
+      if( container.parentElement ) {
+        container.parentElement.replaceChildren(venueApp);
+      }
+
     } else {
       // --- DATE/EVENT CHANGE: Update only the dynamic parts ---
 
@@ -1226,6 +1263,20 @@ const // 1. Centralized Data (Only one place to edit)
 
     // Ensure the cart UI is reset to $0.00 since State.cart was cleared
     updateCartUI();
+  },
+  initBookingApp = (eventID) => {
+    // set configuration based on the given event id
+    let CURRENT_EVENT_ID;
+    if (eventID) {
+      CURRENT_EVENT_ID = eventID;
+    } else {
+      const earliestEventID = bookingTools.getEarliestEventID();
+      CURRENT_EVENT_ID = earliestEventID;
+    }
+    // set the state of the initial event id and configuration
+    State.CURRENT_EVENT_ID = CURRENT_EVENT_ID;
+    State.CURRENT_CONFIG = bookingTools.generateMapConfig(CURRENT_EVENT_ID);
+    return bookingTemplate();
   };
 
-export { MAP_CONFIG, venueMap, updateMapPath, bookingTemplate };
+export { initBookingApp };

@@ -26,7 +26,12 @@ build/
 dist/
 
 #ignore all files in vendor folder
+*/vendor
 vendor/
+
+#ignore webfonts folder
+*/webfonts
+webfonts/
 
 #ignore all files in uploads folder
 uploads/
