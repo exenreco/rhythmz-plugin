@@ -137,7 +137,7 @@ async function submit(productId = 0, quantity = 0, messageEl) {
       messageEl.classList.remove("error");
       messageEl.classList.add("success");
     }
-
+    
     setTimeout(() => {
       window.location.reload();
     }, 1000);

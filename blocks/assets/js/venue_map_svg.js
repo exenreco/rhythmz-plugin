@@ -15,7 +15,7 @@ window.venueCheckout = () => {
 
   const 
   items = Array.from(State.cart.values()),
-  messageEl = document.querySelector(`#${venueId} .__cart .__message`),
+  messageEl = State.template.cartMessage,
   productId = items.map((i) => i.productId),
   quantity = items.map((i) => i.quantity);
 
@@ -319,6 +319,9 @@ const // 1. Centralized Data (Only one place to edit)
    * @return {void}
    */
   focusPath = (id, event = null) => {
+    // If cart has items, only allow focusing the one that is already selected
+    if (State.cart.size > 0 && !State.cart.has(id)) return;
+
     if (State.currentFocus === id) return;
 
     // Remove previous focused elements (use tracked ones!)
@@ -381,8 +384,11 @@ const // 1. Centralized Data (Only one place to edit)
   updateCartUI = () => {
     if (!State.venueId) return;
 
-    const template = State.template,
-      { cart, cartCount, cartTotal } = template;
+    const templateRef = State.template,
+      { cart, cartCount, cartTotal, cartMessage } = templateRef;
+
+    // Find the root element of the app
+    const rootEl = document.getElementById(State.venueId);
 
     if (!cartCount || !cartTotal) return;
 
@@ -390,6 +396,7 @@ const // 1. Centralized Data (Only one place to edit)
       items = [...State.cart.values()];
 
     if (itemCount > 0) {
+      rootEl.classList.add("cart-open"); // Add the locking class
       cartCount.textContent = `${
         itemCount > 1 ? "Selected sections" : "Selected section"
       }: ${items.map((i) => i.name).join(", ")}`;
@@ -399,10 +406,15 @@ const // 1. Centralized Data (Only one place to edit)
         0,
       )}`;
       cart.classList.add("show");
+      cartMessage.textContent = "";
+      cartMessage.classList.remove("error", "success");
     } else {
+      rootEl.classList.remove("cart-open"); // Remove the locking class
       cartCount.textContent = "";
       cartTotal.textContent = "";
       cart.classList.remove("show");
+      cartMessage.textContent = "";
+      cartMessage.classList.remove("error", "success");
     }
 
     /*if (!cart || !cartContent) return;
@@ -438,6 +450,24 @@ const // 1. Centralized Data (Only one place to edit)
    * @param {string} id - The unique section ID
    */
   selectPath = (MAP_CONFIG, id) => {
+    const messageEl = State.template.cartMessage;
+
+    if( messageEl ){
+      messageEl.textContent = "";
+      messageEl.classList.remove("error");
+      // If cart has items AND we are clicking something NEW, block it
+      if (State.cart.size > 0 && !State.cart.has(id)) {
+        messageEl.textContent =
+          "Cart is locked. Close or add the current item to cart first.";
+        messageEl.classList.add("error");
+        setTimeout(() => {
+          messageEl.classList.remove("error");
+          messageEl.textContent = "";
+        }, 2000);
+        return;
+      }
+    }
+
     const configMap = new Map(MAP_CONFIG.map((i) => [i.id, i])),
       config = configMap.get(id);
 
@@ -569,6 +599,19 @@ const // 1. Centralized Data (Only one place to edit)
             transition: transform 0.2s;
           }
           .checkout-btn:hover { transform: scale(1.05); }
+
+          /* Locked State: When an item is in the cart */
+          .__venue.cart-open .__path:not(.__selected),
+          .__venue.cart-open .__vip:not(.__selected) {
+            opacity: 0.15 !important;
+            pointer-events: none !important;
+            cursor: not-allowed !important;
+          }
+
+          .__venue.cart-open .__path.__selected {
+            filter: drop-shadow(0 0 8px #00ff4e);
+            opacity: 1 !important;
+          }
         `;
         defs.appendChild(styles);
         svg.appendChild(defs);
@@ -662,23 +705,20 @@ const // 1. Centralized Data (Only one place to edit)
    */
   bookingTools = {
     getEarliestEventID: () => {
-      const 
-      now = Date.now(),
-      events = window?.RhythmzEventsBlockData?.events || {};
+      const events = window?.RhythmzEventsBlockData?.events || {};
+      const entries = Object.entries(events);
 
-      const closest = Object.values(events).reduce((closest, event) => {
-        const time = new Date(event.startDate).getTime();
+      if (entries.length === 0) return null;
 
-        if (!closest) return event;
+      const [earliestKey] = entries.reduce((earliest, current) => {
+        // current[1] is the event object, current[0] is the key
+        const currentTS = new Date(current[1].startDate).getTime();
+        const earliestTS = new Date(earliest[1].startDate).getTime();
 
-        const closestTime = new Date(closest.startDate).getTime();
+        return currentTS < earliestTS ? current : earliest;
+      });
 
-        return Math.abs(time - now) < Math.abs(closestTime - now)
-          ? event
-          : closest;
-      }, null);
-
-      return closest?.id ?? null;
+      return earliestKey;
     },
     /**
      * Generate map configuration
@@ -755,9 +795,12 @@ const // 1. Centralized Data (Only one place to edit)
      * @author Exenreco Bell
      */
     dateTool: (selector, eventID) => {
-      const Events = window?.RhythmzEventsBlockData?.events || {},
-        EventDates = [],
-        SelectedEvent = Events[eventID] || {};
+      const 
+      Events = window?.RhythmzEventsBlockData?.events || {},
+      EventDates = [];
+
+      // Safeguard: If no ID, try to find the first available event as a fallback
+      const SelectedEvent = Events[eventID] || Object.values(Events)[0] || {};
 
       // the selected event start date
       const { startDate } = SelectedEvent;
@@ -1140,6 +1183,7 @@ const // 1. Centralized Data (Only one place to edit)
       checkoutBtn: template.querySelector(
         ".__cart .__contents .__btn_container .__checkout",
       ),
+      cartMessage: template.querySelector(".__cart .__message"),
       venueId: uniqueId,
       zoomer: zoomerInstance,
       mapArea: content,

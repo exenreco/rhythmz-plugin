@@ -207,10 +207,12 @@
   left: 50%;
   width: 90%;
   padding: 5px;
-  height: 180px;
+  height: auto;
   display: none;
   z-index: 10001;
   max-width: 500px;
+  max-height: 220px;
+  min-height: 180px;
   visibility: hidden;
   background: #111;
   position: fixed;
@@ -265,14 +267,48 @@
   opacity: 0.5;
   transform: rotate(90deg);
 }
-.__venue.map .__cart .__contents {
-  width: 100%;
-  height: 100%;
+.__venue.map .__cart .__message {
+  gap: 0px;
+  width: 98%;
+  margin: auto;
+  height: auto;
   display: flex;
+  flex: 0 0 auto;
+  max-width: 98%;
+  min-width: 98%;
+  flex-wrap: wrap;
+  max-height: none;
+  min-height: none;
+  align-items: left;
+  font-weight: 200;
+  font-size: 0.985rem;
+  line-height: 1.2rem;
   flex-direction: row;
-  align-items: center;
-  justify-items: center;
-  justify-content: center;
+  justify-items: left;
+  justify-content: left;
+  background-color: transparent;
+}
+.__venue.map .__cart .__message.success {
+  color: green;
+}
+.__venue.map .__cart .__message.info {
+  color: blue;
+}
+.__venue.map .__cart .__message.error {
+  color: red;
+}
+.__venue.map .__cart .__message.warning {
+  color: orange;
+}
+.__venue.map .__cart .__contents {
+  width: 98%;
+  margin: auto;
+  height: auto;
+  display: flex;
+  align-items: start;
+  justify-items: left;
+  justify-content: left;
+  flex-direction: column;
 }
 .__venue.map .__cart .__contents .__btn_container,
 .__venue.map .__cart .__contents .cart-info {
