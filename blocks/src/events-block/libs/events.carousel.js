@@ -1,7 +1,6 @@
 import Swiper from "swiper/bundle";
 import "swiper/css";
-import { createTicketPopup } from "./popup.ticket.js";
-import { createBookingPopup } from "./popup.booking.js";
+import { createBookingPopup, createTicketPopup } from "./popup.fns.js";
 import { createMarkup, mediaPlaceholder, formatDate } from "./utils.js";
 
 const 
@@ -12,11 +11,11 @@ const
     startMonth = startDate?.month || '',
     startYear = startDate?.year || '',
     time = startDate?.time || '',
-    itemId = item.id || '';
+    eventId = item.eventId || '';
 
     const age = createMarkup("span");
     age.classList.add("__age");
-    age.textContent = `${item?.age ? item.age : "21+" } Event`;
+    age.textContent = `${item?.ageRestriction ? item.ageRestriction : "21+" } Event`;
 
     const overlay = createMarkup("div");
     overlay.classList.add("__overlay");
@@ -24,13 +23,13 @@ const
 
     const img = createMarkup("img");
     img.classList.add("__poster");
-    img.setAttribute("src", item.imgSrc || "");
+    img.setAttribute("src", item?.mediaSrc || "");
     img.setAttribute("alt", `poster for - ${item.title || ""} event`);
     img.setAttribute("loading", "lazy");
 
     const media = createMarkup("div");
     media.classList.add("__media");
-    if (item.imgSrc && item.imgSrc.length >= 1) {
+    if (item?.mediaSrc && item?.mediaSrc?.trim().length >= 1) {
       media.append(img);
     } else {
       media.append(
@@ -46,7 +45,7 @@ const
 
     const price = createMarkup("span");
     price.classList.add("__price");
-    price.textContent = `Prices From: $${item.price || "--"}`;
+    price.textContent = `Prices From: $${item.lowPrice || "--"}`;
 
     const title = createMarkup("a");
     title.classList.add("__title");
@@ -81,9 +80,9 @@ const
       reservationBtn = e.target.closest(".__reservation"),
       getTicketsBtn = e.target.closest(".__tickets");
       if (reservationBtn) {
-        createBookingPopup(itemId);
+        createBookingPopup(eventId);
       } else if (getTicketsBtn) {
-        createTicketPopup(itemId, {
+        createTicketPopup(eventId, {
           popup: {},
           organizer: {name: item.venue, logo: item.imgSrc}
         });

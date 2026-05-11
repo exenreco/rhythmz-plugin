@@ -39,5 +39,32 @@ export function registerDefaultIcons() {
       polyline: [{ points: "9 18 15 12 9 6" }],
     },
   });
+
+  // clock icon
+  registerIcon({
+    name: "clock",
+    elements: {
+      circle: [{ cx: "12", cy: "12", r: "10" }],
+      polyline: [{ points:"12 6 12 12 16 14" }]
+    },
+  });
+
+  // user icon
+  registerIcon({
+    name: "user",
+    elements: {
+      path: [{d:"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"}],
+      circle: [{cx:"12", cy:"7", r:"4"}]
+    },
+  });
+
+  // dollar icon
+  registerIcon({
+    name: "dollar",
+    elements: {
+      line: [{x1:"12", y1:"1", x2:"12", y2:"23"}],
+      path: [{d:"M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"}],
+    },
+  });
   // Add more default icons here
 }

@@ -35,9 +35,9 @@
         "post_per_page": 10,
         "show_ticket_btn": true,
 
-        "layout": "grid",
+        "layout": "blog",
         "display": true,
-        "grid": {
+        "blog": {
           "id": "",
           "styles": {},
           "ticket": true,
@@ -269,12 +269,12 @@
         "layout": "centered",
         "display": false,
         "buttonOne": {
-          "url": "#",
+          "url": "rhythmzlounge.com/upcoming-events",
           "label": "Get Tickets",
           "display": true
         },
         "buttonTwo": {
-          "url": "#",
+          "url": "rhythmzlounge.com/reservations",
           "label": "The VIP Experience",
           "display": true
         },
@@ -284,17 +284,16 @@
             "tagline": "Omaha, NE",
             "excerpt": "",
             "mediaId": "",
-            "mediaUrl": "https://draisgroup.com/wp-content/uploads/2025/04/bcnc-site-video_1080p-1080p.mp4",
-            "mediaType": "video",
-            "slideType": "custom",
-            "permalink": "",
+            "mimeType": "video",
+            "mediaSrc": "http://localhost/rhythmzlounge.com/wp-content/customs/video/home.mp4",
+            "slideType": "other-slide",
             "buttonOne": {
-              "url": "#",
+              "url": "rhythmzlounge.com/upcoming-events",
               "label": "Get Tickets",
               "display": true
             },
             "buttonTwo": {
-              "url": "#",
+              "url": "rhythmzlounge.com/reservations",
               "label": "The VIP Experience",
               "display": true
             }
@@ -380,7 +379,8 @@
     "file:./css/events.css",
     "file:./css/venue.map.css",
     "file:./css/events.blog.css",
-    "file:./css/event.carousel.css",
+    "file:./css/events.carousel.css",
+    "file:./css/events.slider.css",
     "file:./css/edit.css",
     "file:../../assets/css/popup.css",
     "file:../../assets/css/date.picker.css",
@@ -391,7 +391,8 @@
     "file:./css/events.css",
     "file:./css/venue.map.css",
     "file:./css/events.blog.css",
-    "file:./css/event.carousel.css",
+    "file:./css/events.carousel.css",
+    "file:./css/events.slider.css",
     "file:../../assets/css/popup.css",
     "file:../../assets/css/image.zoom.css",
     "file:../../assets/css/date.picker.css",
@@ -399,7 +400,7 @@
     "file:./css/save.css"
   ],
 
-  "editorScript": ["file:./index.js"],
+  "script": ["file:./libs/controller.js"],
   "viewScript": ["file:./js/frontend.js"],
-  "script": ["file:./libs/setup.js"]
+  "editorScript": ["file:./index.js"]
 }

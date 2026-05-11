@@ -2,7 +2,7 @@
 
 import { useBlockProps } from "@wordpress/block-editor";
 import { useState, useEffect, useRef } from "@wordpress/element";
-import { Setup } from "../libs/setup.js";
+import { Controller } from "../libs/controller.js";
 import { Sidebar } from "./sidebar.js";
 import { ToolBar } from "./toolbar.js";
 
@@ -22,6 +22,8 @@ const Edit = (props) => {
   [calendarData, setCalendarData] = useState({}),
 
   [otherSlides, setOtherSlides] = useState({}),
+
+  [organizerData, setOrganizerData] = useState({}),
 
   { attributes, setAttributes, clientId } = props,
 
@@ -67,8 +69,9 @@ const Edit = (props) => {
       if (RhythmzData) {
         // 1. Load the data (even if it is empty)
         setCartData(window?.cart_data || {});
-        setCalendarData(RhythmzData.events || {});
-        setOtherSlides(RhythmzData.otherSlides || {});
+        setCalendarData(RhythmzData?.events || {});
+        setOtherSlides(RhythmzData?.otherSlides || {});
+        setOrganizerData(RhythmzData?.organizer || {});
 
         // 2. Mark as Loaded
         setHasLoaded(true);
@@ -100,7 +103,7 @@ const Edit = (props) => {
     if (!hasLoaded) return;
 
     // Initialize the Vanilla JS Logic on the INNER ref
-    const instance = Setup({
+    const instance = Controller({
       block:        contentRef.current, // Pass the inner div
       hasLoaded:    hasLoaded,
       swiperRef:    swiperRef.current,
@@ -108,15 +111,17 @@ const Edit = (props) => {
       cartData:     cartData,
       otherSlides:  otherSlides,
       calendarData: calendarData,
+      organizerData: organizerData,
     });
 
-    instance.render();
+    instance?.load?.(calendarData, organizerData, otherSlides);
+    instance?.render?.();
     
     return () => instance?.cleanup?.();
 
     // FIX: Removed 'isSelected' from dependencies to prevent flash on click.
     // Only re-render if data or deep attributes change.
-  }, [attributes, calendarData, otherSlides, cartData]);
+  }, [attributes, calendarData, otherSlides, cartData, organizerData]);
 
   return (
     <>

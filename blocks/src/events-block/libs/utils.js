@@ -120,7 +120,7 @@ const isValidArray = (arr) => {
 
     const _venue = createMarkup(
       "h2", 
-      {className: "__venue", textContent: eVenue || ""}, 
+      {className: "__venue zapfino", textContent: eVenue || ""}, 
       {'data-venue': ''}
     );
 
@@ -225,8 +225,8 @@ const isValidArray = (arr) => {
             justify-content: center;
             text-transform: capitalize;
           } .__placeholder .__inner .__venue {
-            text-stroke: 2px rgba(226, 64, 64, 0.89);
-            -webkit-text-stroke: 2px rgba(226, 64, 64, 0.89);
+            text-stroke: 0.05px rgba(226, 64, 64, 0.89);
+            -webkit-text-stroke: 0.05px rgba(226, 64, 64, 0.89);
           } .__placeholder .__inner .__title {
             width: 85%;
             line-height: 1.225rem;

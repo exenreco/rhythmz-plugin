@@ -1,7 +1,7 @@
-import { formatDate } from "./utils.js";
 import { popup } from "../../../assets/js/popup.js";
-import { createMarkup, mediaPlaceholder } from "./utils.js";
 import { submit, increment, decrement } from "./cart.fns.js";
+import { initBookingApp } from "../../../assets/js/venue_map_svg.js";
+import { formatDate, createMarkup, mediaPlaceholder } from "./utils.js";
 
 
 const getEventTemplate = () => {
@@ -396,20 +396,23 @@ const getEventTemplate = () => {
   };
 
 const createTicketPopup = (eventID, config = {}) => {
-  const events = window?.RhythmzEventsBlockData?.events || {},
-    eventData = events[eventID],
-    popupLayout = getEventTemplate(),
-    content = popupLayout.container,
-    leftContent = popupLayout.left,
-    rightContent = popupLayout.right;
+  console.log("event id", eventID)
+  const 
+  events = window?.RhythmzEventsBlockData?.events || {},
+  organizer = window?.RhythmzEventsBlockData?.organizer || {},
+  eventData = events[eventID],
+  popupLayout = getEventTemplate(),
+  content = popupLayout.container,
+  leftContent = popupLayout.left,
+  rightContent = popupLayout.right;
 
   if (eventData) {
-    const { age, title, tickets, mediaUrl, startDate, endDate, excerpt } =
+    const { ageRestriction, title, tickets, mediaSrc, startDate, endDate, excerpt } =
       eventData;
     // create event poster
     let poster = getEventPoster({
-      imgSrc: mediaUrl,
-      organizer: "Rhythmz",
+      imgSrc: mediaSrc || "",
+      organizer: organizer?.shortName || "Rhythmz",
       eventDate: startDate,
       eventTitle: title,
     });
@@ -420,23 +423,23 @@ const createTicketPopup = (eventID, config = {}) => {
     rightContent.append(
       getEventHeader(
         title,
-        "Rhythmz",
-        "https://www.rhythmzlounge.com/wp-content/uploads/2020/05/detaillogoGreen.png",
+        organizer?.name || "Rhythmz",
+        "", //`${organizer?.logo || ''}`,
         startDate,
       ),
       getEventTickets(tickets),
       getEventDetails(excerpt, [
-        "18+ Event",
+        `${ageRestriction || "21+"} Event`,
         "Ticket sales are final upon purchase.",
         ...(config?.policies && Array.isArray(config.policies)
           ? config.policies
           : []),
       ]),
       getVenue({
-        name: "Rhythmz",
-        address: "123 Main St",
-        link: "https://maps.google.com/?q=Rhythmz",
-        logo: "https://www.rhythmzlounge.com/wp-content/uploads/2020/05/detaillogoGreen.png",
+        name: organizer?.shortName || "",
+        address: `${organizer?.address?.street || ''}, ${organizer?.address?.city || ''}, ${organizer?.address?.state || ''} ${organizer?.address?.zip || ''}`,
+        link: `https://maps.google.com/?q=${organizer?.shortName.replaceAll(' ', '+') || ''}`,
+        logo: `${organizer?.logo || ''}`,
       }),
     );
   } else {
@@ -444,7 +447,7 @@ const createTicketPopup = (eventID, config = {}) => {
     // create event poster
     let poster = getEventPoster({
       imgSrc: "",
-      organizer: "Rhythmz",
+      organizer: organizer?.shortName || "Rhythmz",
       eventDate: "",
       eventTitle: $title_text,
     });
@@ -461,37 +464,31 @@ const createTicketPopup = (eventID, config = {}) => {
     );
   }
 
-  /*content.prepend(
-    datePicker(
-      "2026-04-16",
-      [
-        "2026-04-17",
-        "2026-02-13",
-        "2026-03-13",
-        "2026-04-13",
-        "2026-05-13",
-        "2026-06-13",
-        "2026-07-13",
-        "2026-08-13",
-        "2026-09-13",
-        "2026-10-13",
-        "2026-11-13",
-        "2026-12-13",
-      ],
-      (selectedDate) => alert(selectedDate),
-    )
-  );*/
-
   popup(document.body, "fullWidth", {
     title: createMarkup("div", {
       className: "__popup_title",
-      textContent: "Rhythmz",
+      textContent: "Tickets",
     }),
     content: content,
     ...(config && "popup" in config && typeof config.popup === "object"
       ? config.popup
       : {}),
   });
-};
+  
+},
+createBookingPopup = (eventID, config = {}) => {
 
-export { createTicketPopup };
+  const bookingTemp = initBookingApp(eventID);
+
+  popup(document.body, 'fullWidth', {
+    title: "Booking",
+    content: bookingTemp 
+      ? bookingTemp 
+      : createMarkup("div", { textContent: "No tickets available" }),
+    ...(config && "popup" in config && typeof config.popup === "object"
+      ? config.popup
+      : {}),
+  });
+}
+
+export { createBookingPopup, createTicketPopup };

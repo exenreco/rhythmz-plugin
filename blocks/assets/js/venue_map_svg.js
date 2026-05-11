@@ -34,180 +34,216 @@ const // 1. Centralized Data (Only one place to edit)
     {
       id: "luxury",
       name: "Luxury VIP - Elevated Section",
+      date: "",
       price: "12.00",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M1455,630s-50.75,19.167-69,21-62-21-62-21-12.75-3.167-17-14-13-128-13-128,3.58-8.5,9-6c-1.58-3.833-1-9-1-9l5-2,15-6,1-14,6-1s3.25-5.833,11-3c13.75-1.833,44,0,44,0l3,5,7-1,33,22Z",
     },
     {
       id: "office",
       name: "Office VIP - Elevated Section",
+      date: "",
       price: "0.55",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M1176.51,763.378l169.46-3.123c2.69-.05,5.27,1.511,5.76,3.49l45.59,186.407c0.58,2.4-1.37,4.348-4.36,4.348H1205.32c-2.88,0-5.51-1.913-5.85-4.267L1172.3,766.99C1172.02,765.042,1173.9,763.426,1176.51,763.378Z",
     },
     {
       id: "diamond",
       name: "Diamond VIP - Elevated Section",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M818.588,794.257L1165.06,791.7a4.414,4.414,0,0,1,4.29,3.692l24.03,167.93a3.578,3.578,0,0,1-3.46,4.35h-375.3a4.007,4.007,0,0,1-3.845-4.281l4.074-165.433A3.8,3.8,0,0,1,818.588,794.257Z",
     },
     {
       id: "platinum",
       name: "Platinum VIP - Elevated Section",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M395.853,827.5H805.91a3.453,3.453,0,0,1,3.54,3.436L807.559,961.4a4.152,4.152,0,0,1-3.993,4.15l-450.815,5.4c-2.348.028-3.669-1.868-2.953-4.23l41.123-135.658A5.415,5.415,0,0,1,395.853,827.5Z",
     },
     {
       id: "large_table_1",
       name: "Table For 4 (Left)",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M464.686,736.125H579.814a3.3,3.3,0,0,1,3.3,4l-5.389,33.8a5.025,5.025,0,0,1-4.71,4.2H454.8c-2.232,0-3.594-1.881-3.043-4.2l8.04-33.8A5.343,5.343,0,0,1,464.686,736.125Z",
     },
     {
       id: "large_table_2",
       name: "Table For 4 (Right)",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M594.681,736.221l117.712-.7a3.674,3.674,0,0,1,3.753,4.076l-3.021,34.415a4.73,4.73,0,0,1-4.561,4.267l-119.788.688a3.488,3.488,0,0,1-3.413-4.219l4.807-34.407A4.814,4.814,0,0,1,594.681,736.221Z",
     },
     {
       id: "attraction",
       name: "Attraction VIP - Elevated Section",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M741,518H932a4,4,0,0,1,4.074,3.819l3.173,162.893a4.294,4.294,0,0,1-4.242,4.455H728.328a4.017,4.017,0,0,1-3.99-4.455L736.71,521.819A4.292,4.292,0,0,1,741,518Z",
     },
     {
       id: "silver",
       name: "Silver VIP - Elevated Section",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M310,407H444L406,565H321l-5-28-47-1Z",
     },
     {
       id: "owners_table",
       name: "Owners Table VIP - Elevated Section",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M141,270l-24,52,52,1,8,48,36,1s18.579,0.378,27-19c13.421-26.778,49-127,49-127s10.729-14.822-7-11c-16.529-.978-62,0-62,0l7-22H186l-18,40-45,3-17,32Z",
     },
     {
       id: "gold",
       name: "Gold VIP - Elevated Section",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M209.218,71.731l186.48-2.19c2.4-.028,3.855,1.417,3.253,3.232l-25.166,75.959c-0.664,2-3.246,3.635-5.764,3.639l-195.665.291c-2.395,0-3.609-1.581-2.714-3.534l33.968-74.14A6.639,6.639,0,0,1,209.218,71.731Z",
     },
     {
       id: "dance_floor_sm",
       name: "Dance Floor (SM) VIP - Elevated Booth",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M396.253,203.293l86.438-.281a3.588,3.588,0,0,1,3.644,3.968l-2.822,33.991a4.909,4.909,0,0,1-4.65,4.551l-92.95.3c-2.361.008-3.763-2.027-3.138-4.525l8.507-34.01A5.455,5.455,0,0,1,396.253,203.293Z",
     },
     {
       id: "dance_floor_lg",
       name: "Dance Floor (LG) VIP - Elevated Booth",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M549.546,203.614L743.29,203.1a3.809,3.809,0,0,1,3.732,4.279l-2.44,32.682a4.737,4.737,0,0,1-4.456,4.456l-197.287,1.455a3.649,3.649,0,0,1-3.591-4.5l5.357-33.455A5.282,5.282,0,0,1,549.546,203.614Z",
     },
     {
       id: "small_table_1",
       name: "Table For 2 (Rear Left)",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M1017.17,510.8c13.71,0,24.83,6.089,24.83,13.6s-11.12,13.6-24.83,13.6-24.837-6.089-24.837-13.6S1003.45,510.8,1017.17,510.8Z",
     },
     {
       id: "small_table_2",
       name: "Table For 2 (Rear Center)",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M1116.23,510.392c12.76,0.153,22.97,6.459,22.82,14.083s-10.62,13.681-23.38,13.528-22.98-6.459-22.82-14.084S1103.47,510.238,1116.23,510.392Z",
     },
     {
       id: "small_table_3",
       name: "Table For 2 (Rear Right)",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M1214.65,509.5c13.17,0.158,23.72,6.667,23.56,14.538s-10.96,14.122-24.13,13.964-23.72-6.668-23.56-14.538S1201.48,509.342,1214.65,509.5Z",
     },
     {
       id: "small_table_4",
       name: "Table For 2 (Front Left)",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M1023.62,601.9c13.8,0.166,24.86,6.989,24.69,15.239s-11.49,14.8-25.3,14.637-24.858-6.989-24.692-15.239S1009.81,601.735,1023.62,601.9Z",
     },
     {
       id: "small_table_5",
       name: "Table For 2 (Front Center)",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M1128.02,600.567c13.81,0.167,24.87,6.989,24.7,15.239s-11.49,14.8-25.3,14.637-24.86-6.988-24.7-15.238S1114.22,600.4,1128.02,600.567Z",
     },
     {
       id: "small_table_6",
       name: "Table For 2 (Front Right)",
+      date: "",
       price: "0",
       capacity: "",
       quantity: 0,
       productId: "",
+      description: "",
       minimum_spent: "",
       path: "M1231.86,600.567c13.8,0.167,24.86,6.989,24.69,15.239s-11.49,14.8-25.3,14.637-24.86-6.988-24.69-15.238S1218.05,600.4,1231.86,600.567Z",
     },
@@ -384,34 +420,73 @@ const // 1. Centralized Data (Only one place to edit)
   updateCartUI = () => {
     if (!State.venueId) return;
 
-    const templateRef = State.template,
-      { cart, cartCount, cartTotal, cartMessage } = templateRef;
+    const 
+    templateRef = State.template,
+    rootEl = document.getElementById(State.venueId), // Find the root element of the app
+    { 
+      cart, cartTitle, cartDetails, 
+      cartPrice, cartQuantity, cartGuest, 
+      cartDate, cartTotal, cartMessage 
+    } = templateRef;
 
-    // Find the root element of the app
-    const rootEl = document.getElementById(State.venueId);
-
-    if (!cartCount || !cartTotal) return;
-
-    const itemCount = State.cart.size,
-      items = [...State.cart.values()];
+    const 
+    itemCount = State.cart.size,
+    items = [...State.cart.values()];
 
     if (itemCount > 0) {
       rootEl.classList.add("cart-open"); // Add the locking class
-      cartCount.textContent = `${
+      /*cartCount.textContent = `${
         itemCount > 1 ? "Selected sections" : "Selected section"
-      }: ${items.map((i) => i.name).join(", ")}`;
-      cartTotal.textContent = `$${items.reduce(
-        (sum, item) =>
-          sum + Number(item.price || 0) * Number(item.quantity || 0),
-        0,
-      )}`;
+      }: ${items.map((i) => i.name).join(", ")}`;*/
+      const hasItem = itemCount >= 1;
+
+      if(hasItem && cartTitle) {
+        cartTitle.textContent = items.map((i) => i.name);
+      }
+
+      if( hasItem && cartDetails) {
+        cartDetails.textContent = items.map((i) => i.description);
+      }
+
+      if( hasItem && cartQuantity) {
+        cartQuantity.textContent = items.map((i) => i.quantity);
+      }
+
+      if( hasItem && cartPrice) {
+        let price = items.reduce((sum, i) => sum + Number(i.price || 0), 0);
+        cartPrice.textContent = `$${price.toFixed(2)}`;
+      }
+
+      if( hasItem && cartGuest) {
+        let capacity = items.reduce((sum, i) => sum + Number(i.capacity || 0), 0);
+        cartGuest.textContent = `${capacity} ${capacity > 1 ? "Guests" : "Guest"}`;
+      }
+
+      if( hasItem && cartDate) {
+        cartDate.textContent = items.map((i) => i.date);
+      }
+
+      if( hasItem && cartTotal) {
+        let total = items.reduce(
+          (sum, i) =>
+            sum + Number(i.price || 0) * Number(i.quantity || 0),
+          0,
+        );
+        cartTotal.textContent = `$${total.toFixed(2)}`;
+      }
+
       cart.classList.add("show");
       cartMessage.textContent = "";
       cartMessage.classList.remove("error", "success");
     } else {
       rootEl.classList.remove("cart-open"); // Remove the locking class
-      cartCount.textContent = "";
       cartTotal.textContent = "";
+      cartTitle.textContent = "";
+      cartDetails.textContent = "";
+      cartQuantity.textContent = "";
+      cartPrice.textContent = "";
+      cartGuest.textContent = "";
+      cartDate.textContent = "";
       cart.classList.remove("show");
       cartMessage.textContent = "";
       cartMessage.classList.remove("error", "success");
@@ -484,26 +559,18 @@ const // 1. Centralized Data (Only one place to edit)
       State.cart.set(id, {
         id: config.id,
         name: config.name,
+        date: config.date,
         price: config.price,
+        capacity: config.capacity,
         quantity: config.quantity,
         productId: config.productId,
+        description: config.description,
       });
       targets.forEach((p) => p.classList.add("__selected"));
       listItem?.classList.add("__selected");
     }
 
     updateCartUI();
-  },
-  //Function to update tooltip info
-  updateMapPath = (id, data) => {
-    const targets = State.paths.get(id);
-    if (!targets) return;
-
-    targets.forEach((part) => {
-      Object.entries(data).forEach(([key, val]) => {
-        part.dataset[key] = val;
-      });
-    });
   },
   venueMap = (MAP_CONFIG = []) => {
     if (!MAP_CONFIG) return;
@@ -765,6 +832,8 @@ const // 1. Centralized Data (Only one place to edit)
           UPDATED_CONFIG.push({
             ...mapItem,
             price: parseFloat(matchingTicket?.price?.totalPrice) || "0.00",
+            date: matchingTicket?.date,
+            description: matchingTicket?.description,
             productId: matchingTicket?.id,
             ...(matchingTicket?.stocks?.status === "instock"
               ? { quantity: parseInt(matchingTicket?.stocks?.quantity) || 1 }
@@ -1141,13 +1210,17 @@ const // 1. Centralized Data (Only one place to edit)
     toolbar.append(toolbarLeft, toolbarRight);
 
     // ----------------------CART-----------------------
+    const cartTitle = document.createElement("h3");
+    cartTitle.classList.add("__cart_title");
+    cartTitle.textContent = "VIP Reservations";
+
     const cartCloseBtn = document.createElement("button");
     cartCloseBtn.classList.add("__btn", "__close");
     cartCloseBtn.append(getIcon("close-thin"));
 
     const cartToolbar = document.createElement("div");
     cartToolbar.classList.add("__toolbar", "cart");
-    cartToolbar.append(cartCloseBtn);
+    cartToolbar.append(cartTitle, cartCloseBtn);
 
     const cartMessage = document.createElement("div");
     cartMessage.classList.add("__message");
@@ -1155,9 +1228,33 @@ const // 1. Centralized Data (Only one place to edit)
     const cartContents = document.createElement("div");
     cartContents.classList.add("__contents");
     cartContents.innerHTML = `
-      <div class="cart-info">
-        <span class="count"></span>
-        <span class="total"></span>
+      <div class="__meta">
+        <span class="__date">--/--/----</span>
+      </div>
+      <div class="__item_name">
+        <span class="__name">Platinum VIP</span>
+      </div>
+      <div class="__item_details">
+        <p>Description</p>
+      </div>
+      <div class="__labels">
+        <span class="__label __price">Price</span>
+        <span class="__label __multiplier">-</span>
+        <span class="__label __quantity">Quantity</span>
+        <span class="__label __total">Total</span>
+      </div>
+      <div class="__fields">
+        <span class="__field __price">$0.00</span>
+        <span class="__field __multiplier">x</span>
+        <span class="__field __quantity">1</span>
+        <span class="__field __total">$0.00</span>
+      </div>
+      <div class="__item_info">
+        <span class="__guest">15 Guests</span>
+        <span class="__minimum">
+          <span class="__label">Minimum Spent</span>
+          <span class="__value">$0.00</span>
+        </span>
       </div>
       <div class="__btn_container">
         <button class="__btn __checkout">Add to Cart</button>
@@ -1174,12 +1271,21 @@ const // 1. Centralized Data (Only one place to edit)
       cart: template.querySelector(".__cart"),
       cartCloseBtn: template.querySelector(".__cart_btn"),
       cartContent: template.querySelector(".__cart .__contents"),
-      cartCount: template.querySelector(
+
+      cartTitle: template.querySelector(".__cart .__contents .__item_name .__name"),
+      cartTotal: template.querySelector(".__cart .__contents .__fields .__total"),
+      cartPrice: template.querySelector(".__cart .__contents .__fields .__price"),
+      cartQuantity: template.querySelector(".__cart .__contents .__fields .__quantity"),
+      cartDetails: template.querySelector(".__cart .__contents .__item_details"),
+      cartGuest: template.querySelector(".__cart .__contents .__item_info .__guest"),
+      cartDate: template.querySelector(".__cart .__contents .__meta .__date"),
+
+      /*cartCount: template.querySelector(
         ".__cart .__contents .cart-info .count",
       ),
       cartTotal: template.querySelector(
         ".__cart .__contents .cart-info .total",
-      ),
+      ),*/
       checkoutBtn: template.querySelector(
         ".__cart .__contents .__btn_container .__checkout",
       ),

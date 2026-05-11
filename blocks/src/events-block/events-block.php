@@ -288,24 +288,29 @@ function getEventsCalendarEvents() {
       ? \wp_trim_words( $post->post_content, 30 ) 
       : null;
 
+      $prices = !empty($sanitizedTickets)
+        ? array_column(array_column($sanitizedTickets, 'price'), 'totalPrice') 
+        : [];
+
       ## Create a new custom event object
       $eventsList[ $event ] = [
-        'age'         =>  ( $age && ! empty( $age) ) ? $age : null,
         'title'       => ( $title && ! empty( $title) ) 
           ? \html_entity_decode($title, ENT_QUOTES, 'UTF-8') 
           : null,
         'excerpt'     => ( $excerpt && !empty($excerpt) ) 
           ? \html_entity_decode($excerpt, ENT_QUOTES, 'UTF-8') 
           : null,
-        'endDate'     => ( $endDate && ! empty($endDate) ) ? $endDate : null,
-        'mediaId'     => ( $mediaId && !empty($mediaId) ) ? $mediaId : null,
-        'mediaUrl'    => ( $mediaUrl && !empty($mediaUrl) ) ? \esc_url_raw($mediaUrl) : null,
-        'mediaType'   => ( $mediaType && !empty($mediaType) ) ? $mediaType : null,
-        'tickets'     => ( $sanitizedTickets && !empty($sanitizedTickets) ) ? (array) $sanitizedTickets : [],
-        'startDate'   => ( $startDate && ! empty($startDate) ) ? $startDate : null,
-        'permalink'   => ( $permalink && ! empty($permalink) ) ? \esc_url_raw($permalink) : null,
-        'slideType'   => 'event',
-        'cartUrl'     => ( \function_exists('\site_url') ) ? \esc_url_raw(\site_url('/cart/')): null,
+        'endDate'       => ( $endDate && ! empty($endDate) ) ? $endDate : null,
+        'mediaId'       => ( $mediaId && !empty($mediaId) ) ? $mediaId : null,
+        'mediaSrc'      => ( $mediaUrl && !empty($mediaUrl) ) ? \esc_url_raw($mediaUrl) : null,
+        'mimeType'      => ( $mediaType && !empty($mediaType) ) ? $mediaType : null,
+        'tickets'       => ( $sanitizedTickets && !empty($sanitizedTickets) ) ? (array) $sanitizedTickets : [],
+        'startDate'     => ( $startDate && ! empty($startDate) ) ? $startDate : null,
+        'permalink'     => ( $permalink && ! empty($permalink) ) ? \esc_url_raw($permalink) : null,
+        'slideType'     => 'event-slide',
+        'lowPrice'      => !empty($prices) ? \min($prices) : null,
+        'ageRestriction' => ( $age && ! empty( $age) ) ? $age : '21+',
+        'cartUrl'       => ( \function_exists('\site_url') ) ? \esc_url_raw(\site_url('/cart/')): null,
       ];
     endif;
   endforeach;
@@ -337,7 +342,7 @@ function getOrganizer() {
   return [
     'id' => 1,
     'name'      => 'Rhythmz Lounge - Night Club',
-    'logo'      => 'https://rhythmz.com/wp-content/uploads/2026/04/rhythmz.png',
+    'logo'      => 'https://www.rhythmzlounge.com/wp-content/uploads/2026/05/rhythmz-logo.white_.png',
     'shortName' => 'Rhythmz',
     'address'   => [
       'street'  => '10841 Q Street',

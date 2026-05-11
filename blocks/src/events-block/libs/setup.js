@@ -3,6 +3,7 @@ import { Layouts } from './layouts.js';
 import { isValidObject } from './utils.js';
 import { initBookingApp } from "../../../assets/js/venue_map_svg.js";
 import { eventCarousel } from "./events.carousel.js";
+import { eventsSlider } from './events.slider.js';
 import { EventsBlog } from './events.blog.js';
 import { registerDefaultIcons } from "../../../assets/js/icons.default.js";
 
@@ -11,10 +12,11 @@ import '../css/slider.css';
 
 registerDefaultIcons();
 
-const Setup = ({ block, swiperRef, attributes, otherSlides, calendarData }) => {
-    
-    if (!block) return;
+const Setup = ({ block, swiperRef, attributes, otherSlides, calendarData, organizerData }) => {
+  console.log('organizer data', organizerData);
 
+    if (!block) return;
+    
     const setup = {
       block: null,
 
@@ -123,7 +125,7 @@ const Setup = ({ block, swiperRef, attributes, otherSlides, calendarData }) => {
               id: key,
               age: event.age,
               title: event.title,
-              excerpt: event.description,
+              excerpt: event.excerpt,
               startDate: event.startDate,
               endDate: event.endDate,
               poster: event.mediaUrl,
@@ -179,10 +181,10 @@ const Setup = ({ block, swiperRef, attributes, otherSlides, calendarData }) => {
 
       /**
        * BOOKING TEMPLATE
-       * 
+       *
        * creates a template intended for a booking page
-       * 
-       * @returns 
+       *
+       * @returns
        */
       bookingContainer: () => {
         const temp = document.createElement("div");
@@ -199,7 +201,7 @@ const Setup = ({ block, swiperRef, attributes, otherSlides, calendarData }) => {
       },
 
       eventsTemplate: () => {
-        const 
+        const
         layout = 'grid',//attributes?.events?.layout || 'grid',
         perPage = 1,
         events = [],
@@ -208,8 +210,8 @@ const Setup = ({ block, swiperRef, attributes, otherSlides, calendarData }) => {
         for (const [key, value] of eventsData) {
           events.push(setup.layouts.event(
             layout  ? layout : 'grid',
-            eventsData.get(key), 
-            {}, 
+            eventsData.get(key),
+            {},
             (el) => {}
           ));
         }
@@ -335,11 +337,59 @@ const Setup = ({ block, swiperRef, attributes, otherSlides, calendarData }) => {
             popupStyles: {},
           },
         );
+        const newSlider = eventsSlider(
+          (() => {
+            const eventsSliderData = [
+              {
+                id: 'test-123',
+                age: '18+',
+                title: 'Event Title',
+                price: "3.99",
+                imgSrc: '',
+                slideType: 'event-slide',
+                excerpt: 'Tests',
+                endDate: new Date().toISOString(),
+                startDate: new Date().toISOString(),
+                permalink: '#',
+                venueName: 'Rhythmz',
+              }
+            ];
+            for (const [key, value] of eventsData)
+              eventsSliderData.push({
+                id: eventsData.get(key).id,
+                age: eventsData.get(key).age,
+                title: eventsData.get(key).title,
+                price: "3.99",
+                imgSrc: eventsData.get(key).poster,
+                endDate: eventsData.get(key).endDate,
+                excerpt: eventsData.get(key).excerpt,
+                slideType: 'event-slide',
+                startDate: eventsData.get(key).startDate,
+                permalink: eventsData.get(key).permalink,
+                venueName: 'Rhythmz',
+              });
+            return eventsSliderData.length >= 1 ? eventsSliderData : [];
+          })(), {
+            id: "test",
+            /*styles: {
+              bgColor: "red",
+              textColor: "blue",
+              accentColor: "yellow",
+              buttonColor: "orange",
+              paginationColor: "green",
+              ageBgColor: "purple"
+            },*/
+            limiter: 6,
+            swiperOptions: {},
+          },
+        );
+
         const both = document.createElement('div');
-        both.append(carouselView.markup, gridView, eventsEl);
+        both.append(newSlider.markup, carouselView.markup, gridView, eventsEl);
         setup.setEventsEl(both);
 
         carouselView.init();
+        newSlider.init();
 
         return both;
       },
@@ -374,7 +424,7 @@ const Setup = ({ block, swiperRef, attributes, otherSlides, calendarData }) => {
           customPagination = (swiperInst, current, total) => {
             let fractionHtml = `
                 <span class="fractions">
-                  <i class="item current">${current}</i> 
+                  <i class="item current">${current}</i>
                   <i class="item separator">/</i>
                   <i class="item total">${total}</i>
                 </span>
@@ -566,7 +616,7 @@ const Setup = ({ block, swiperRef, attributes, otherSlides, calendarData }) => {
         setup.eventsTemplate();
         setup.bookingContainer();
 
-        const 
+        const
         blockEl = setup.getBlock(),
         sliderEl = setup.getSwiperEl(),
         eventsEl = setup.getEventsEl(),

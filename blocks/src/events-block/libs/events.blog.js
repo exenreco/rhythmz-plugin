@@ -1,6 +1,6 @@
-import { createMarkup, mediaPlaceholder, formatDate } from "./utils.js";
 import { createBlog } from "./model.blog.js";
-import { popup } from "../../../assets/js/popup.js";
+import { createBookingPopup, createTicketPopup } from "./popup.fns.js";
+import { createMarkup, mediaPlaceholder, formatDate } from "./utils.js";
 
 const
  __blogTemplate = () => {
@@ -89,9 +89,9 @@ const
     const actions = createMarkup("div", { className: "__actions" }),
       book = createMarkup(
         "button",
-        { className: "__btn __book", innerHTML: "VIP Reservations" },
+        { className: "__btn __book", textContent: "VIP Reservations" },
         {
-          "data-book": "",
+          "data-id": "",
           role: "button",
           type: "button",
           title: "VIP Reservations",
@@ -100,9 +100,9 @@ const
       ),
       tickets = createMarkup(
         "button",
-        { className: "__btn __tickets", innerHTML: "Get Tickets" },
+        { className: "__btn __tickets", textContent: "Get Tickets" },
         {
-          "data-tickets": "",
+          "data-id": "",
           role: "button",
           type: "button",
           title: "Get Tickets",
@@ -112,13 +112,18 @@ const
 
     actions.append(book, tickets);
 
+    const link = createMarkup("a", 
+      { className: "link", href: "#"},
+      { "data-permalink": ""}
+    );
     const title = createMarkup(
       "h3",
       { className: "__title" },
       { "data-title": "", "aria-label": "Event Title" },
     );
+    link.appendChild(title);
 
-    detailsRight.append(dateTime, title, actions);
+    detailsRight.append(dateTime, link, actions);
 
     detailFragment.append(detailsLeft, detailsRight);
     details.append(detailFragment);
@@ -131,383 +136,6 @@ const
     article.append(fragment);
 
     return article;
-  },
-  __popupViewTickets = (e, eventID = "", config = {}) => {
-    const 
-    events = window?.RhythmzEventsBlockData?.events || {},
-    match = Object.keys(events).find((k) => k === eventID);
-
-    const 
-    popup = createMarkup("div", { className: "__eb_ticket_popup" }),
-    overlay = createMarkup("div", { className: "__overlay" }),
-    posterContainer = createMarkup("div", {className: "__poster_container"});
-
-    const 
-    layout = createMarkup("div", { className: "__ticket_layout" }),
-    layoutLeft = createMarkup("div", { className: "__left" }),
-    layoutRight = createMarkup("div", { className: "__right" }),
-    rightContainer = createMarkup("div", { className: "__container" });
-
-    const 
-    titleEl = createMarkup("h1", { className: "__title" }),
-    dateEl = createMarkup("div", { className: "__date" }),
-    descEl = createMarkup("div", { className: "__desc" }),
-    venueEl = createMarkup("p", { className: "__venue" });
-
-    descEl.append(
-      createMarkup(
-        "h3",
-        { textContent: "Details" },
-        { "aria-label": "Event details" },
-      ),
-    );
-    venueEl.innerHTML = `
-      <img src="${config?.organizer?.logo || ""}" alt="${
-        config?.organizer?.name || ""
-        }" />
-      <span>${config?.organizer?.name || ""}</span>
-    `;
-
-    let 
-    fragment = document.createDocumentFragment(),
-    __media = mediaPlaceholder({
-      venue: config?.organizer?.shortName || "",
-      title: "Img not found",
-      date: "--/--/----",
-    });
-
-    if (!match) {
-      // events not found
-      rightContainer.classList.add("__404");
-
-      titleEl.textContent = "Event not found (404 Error)";
-
-      dateEl.textContent = "--/--/----";
-      descEl.append(
-        createMarkup("p", {
-          textContent: "The event you are looking for is not available.",
-        }),
-      );
-
-      overlay.append(__media);
-      posterContainer.append(__media.cloneNode(true));
-      rightContainer.append(titleEl, venueEl, dateEl, descEl);
-      fragment.append(rightContainer);
-    } else {
-      rightContainer.classList.add("__event");
-
-      const {
-        age,
-        title,
-        tickets,
-        mediaUrl,
-        excerpt,
-        startDate,
-        mediaType,
-        cartUrl,
-      } = events[match];
-
-      if (mediaType && mediaUrl) {
-        if (mediaType === "video") {
-          __media = createMarkup("video", {}, {
-              src: mediaUrl,
-              alt: `${title || ""} - poster`,
-              loop: true,
-              muted: true,
-              controls: false,
-              playsinline: true,
-              autoplay: true,
-          });
-        }
-        if (mediaType === "image") {
-          __media = createMarkup("img", {}, {
-              src: mediaUrl,
-              alt: `${title || ""} - poster`,
-          });
-        }
-      }
-
-      // left content
-      overlay.append(__media);
-      posterContainer.append(__media.cloneNode(true));
-
-      titleEl.textContent = title || "";
-      dateEl.textContent = "--/--/----";
-
-      // description
-      const policyList = createMarkup("ul", { className: "__policy_list" });
-      policyList.append(
-        createMarkup("li", { textContent: `${age || "All ages"} Event` || "" }),
-        createMarkup("li", {
-          textContent: `Ticket sales are final upon purchase.`,
-        }),
-      );
-      descEl.append(
-        createMarkup("p", { textContent: excerpt || "" }),
-        createMarkup("h3", { textContent: "Policy" }),
-        policyList,
-      );
-
-      // organizer
-      const organizerEl = createMarkup("div", { className: "__organizer" });
-      const { address, name } = config?.organizer || {};
-      organizerEl.append(
-        createMarkup("h3", { textContent: "Venue" }),
-        createMarkup("div", { textContent: name || "" }),
-        createMarkup("div", {
-          textContent:
-            `${address?.street || ""}, ${address?.city || ""} ${
-              address?.state || ""
-            } ${address?.zip || ""}` || "",
-        }),
-        createMarkup(
-          "a",
-          { textContent: "Open Map" || "" },
-          {
-            role: "button",
-            tabindex: 0,
-            "aria-label": "link to google maps",
-            target: "_blank",
-            href: `https://maps.google.com/?q=${name}` || "",
-          },
-        ),
-      );
-
-      // Ticket Forms
-      const formList = createMarkup("ul", { className: "__form_list" });
-      let formFragment = document.createDocumentFragment();
-      if (tickets && tickets instanceof Array && tickets.length >= 1) {
-        tickets.forEach((ticket) => {
-          const { name, stock, description, markup } = ticket,
-            status = stock > 0 ? "Available" : "Sold Out",
-            price = `$${ticket?.price?.totalPrice}` || 0;
-
-          // ticket header
-          const header = createMarkup("div", { className: "__header" });
-          header.append(
-            createMarkup("h3", {
-              className: "__name",
-              textContent: name || "",
-            }),
-          );
-          const ticketDesc = createMarkup("div", { className: "__description" });
-          ticketDesc.append(
-            createMarkup("i", { 
-                className: "__ticket_desc",
-                innerHTML: description || "" 
-            }),
-          );
-
-          // ticket info
-          const infoRow = createMarkup("div", { className: "__row info" });
-          infoRow.append(
-            createMarkup("span", {
-              className: "__price",
-              textContent: "Price",
-            }),
-            createMarkup("span", { className: "__sep" }),
-            createMarkup("span", {
-              className: "__quantity",
-              textContent: "Quantity",
-            }),
-            createMarkup("span", {
-              className: "__total",
-              textContent: "Total",
-            }),
-          );
-
-          // ticket price col
-          const priceCol = createMarkup("div", { className: "__price" });
-          priceCol.append(
-            createMarkup("span", { textContent: `${price}` || "" }),
-          );
-
-          // ticket quantity col
-          const decreaseBtn = createMarkup(
-              "button",
-              { innerHTML: "<i class='fa-solid fa-minus'></i>", className: "__step __decrease" },
-              {
-                role: "button",
-                tabindex: 0,
-                "aria-label": `Decrease ${ticket.name || ""} quantity`,
-              },
-            ),
-            increaseBtn = createMarkup(
-              "button",
-              { innerHTML: "<i class='fa-solid fa-plus'></i>", className: "__step __increase" },
-              {
-                role: "button",
-                tabindex: 0,
-                "aria-label": `Increase ${ticket.name || ""} quantity`,
-              },
-            );
-
-          const quantityCol = createMarkup("div", { className: "__quantity" });
-          quantityCol.append(decreaseBtn);
-          quantityCol.innerHTML += markup;
-          quantityCol.append(increaseBtn);
-
-          // ticket total
-          const totalCol = createMarkup("div", { className: "__total" });
-          totalCol.append(
-            createMarkup("span", { textContent: `${price}` || "" }),
-          );
-
-          // ticket data
-          const dataRow = createMarkup("div", { className: "__row data" });
-          dataRow.append(
-            priceCol,
-            createMarkup(
-                "span", 
-                { className: "__sep", innerHTML: "<i class='fa-solid fa-xmark'></i>" }
-            ),
-            quantityCol,
-            totalCol,
-          );
-
-          const inputRow = createMarkup("div", { className: "__row input" });
-          inputRow.append(
-            createMarkup(
-              "label",
-              { className: "__label", textContent: "Add to Cart" },
-              {
-                for: `ticket-${ticket.id || ""}`,
-                "aria-label": `Add ${ticket.name || ""} to Cart`,
-              },
-            ),
-            createMarkup(
-              "button",
-              { id: `ticket-${ticket.id}`, className: "__add_to_cart", textContent: "Add to Cart" },
-              {
-                type: "submit",
-                name: "add-to-cart",
-                value: `${ticket.id || ""}`,
-              },
-            ),
-          );
-
-          const group = createMarkup("div", { className: "__group" });
-          group.append(dataRow, inputRow);
-
-          const form = createMarkup(
-            "form",
-            { className: "__form" },
-            {
-              method: "POST",
-              action: cartUrl || "",
-              enctype: "multipart/form-data",
-              autocomplete: false,
-              "data-provider":
-                "Tribe__Tickets_Plus__Commerce__WooCommerce__Main",
-              "data-provider-id": "woo",
-            },
-          );
-          form.append(header, ticketDesc, infoRow, group);
-
-          // form event listener for changes
-          form.addEventListener("change", (e) => {
-            const input = e.target
-              .closest(".__quantity")
-              .querySelector("input.input-text"); // user element input
-
-            if (input) {
-              e.preventDefault();
-              e.stopImmediatePropagation();
-              console.log(input);
-            }
-          });
-
-          // form event listener for clicks
-          form.addEventListener("click", (e) => {
-            const increaseBtn = e.target.closest("button.__increase"),
-              decreaseBtn = e.target.closest("button.__decrease"),
-              addToCartBtn = e.target.closest("button[name='add-to-cart']");
-
-            if (increaseBtn || decreaseBtn) {
-              e.preventDefault();
-              e.stopImmediatePropagation();
-
-              const // user element input
-                qty = e.target
-                  .closest(".__quantity")
-                  .querySelector("input.input-text"),
-                qtyValue = Number(qty?.value || 1),
-                maxQty = Number(qty?.max || 5),
-                minQty = Number(qty?.min || 1),
-                stepQty = Number(qty?.step || 1);
-
-              if (qty) {
-                if (increaseBtn) {
-                  if (qtyValue + stepQty <= maxQty)
-                    qty.value = `${Math.floor(qtyValue + stepQty)}`;
-                }
-                if (decreaseBtn) {
-                  if (qtyValue - stepQty >= minQty)
-                    qty.value = `${Math.floor(qtyValue - stepQty)}`;
-                }
-                qty.dispatchEvent(new Event("change", { bubbles: true }));
-              }
-            }
-            if (addToCartBtn) return;
-          });
-
-          const formItem = createMarkup("li", { className: "__form_item" });
-          formItem.append(form);
-          formFragment.append(formItem);
-        });
-        formList.append(formFragment);
-      } else {
-        formFragment.append(
-          createMarkup("p", { textContent: "No tickets available" }),
-        );
-      }
-
-      rightContainer.append(
-        titleEl,
-        venueEl,
-        dateEl,
-        formList,
-        descEl,
-        organizerEl,
-        //createMarkup("span", { textContent: `${JSON.stringify(tickets)}` }, {}),
-      );
-      fragment.append(rightContainer);
-    }
-
-    layoutLeft.append(posterContainer);
-    layoutRight.append(fragment);
-    layout.append(layoutLeft, layoutRight);
-
-    popup.append(overlay, layout);
-    
-    return popup;
-  },
-  __popupViewBooking = (e, eventID = "", config = {}) => {
-
-  },
-  __blogPopups = (e, view = "", eventID = "", config = {}) => {
-    let _view = "dialog",
-      layout = createMarkup("div", {
-        className: "__empty_layout",
-        textContent: "No Content",
-      }),
-      sanitized =
-        view && typeof view === "string"
-          ? view.toLocaleLowerCase().trim()
-          : "error";
-
-    if (sanitized === "tickets" || sanitized === "booking") {
-      if (sanitized === "tickets") {
-        _view = "fullWidth";
-        layout = __popupViewTickets(e, eventID, config);
-      }
-      if (sanitized === "booking") {
-        _view = "fullWidth";
-        layout = __popupViewBooking(e, eventID, config);
-      }
-    }
-
-    popup(document.body, _view, {title: sanitized, content: layout});
   },
   SEO = (events = [], info = {}) => {
     const { seo, organizer } = info;
@@ -648,17 +276,19 @@ const
         const endDate = formatDate(item.endDate);
 
         return {
+          id: String(item.eventId || ""),
           key: String(item.id),
-          age: `${item?.age || "21+"} Event`,
+          age: `${item?.ageRestriction || "21+"} Event`,
           alt: item.title ? `${item.title} - poster` : "",
-          src: item?.imgSrc || "",
-          price: `From ${item?.price}`,
+          src: item?.mediaSrc || "",
+          price: `From $${item?.lowPrice || '--'}`,
           title: item?.title || "",
           description: item?.excerpt || "",
           startMonth: startDate.month || "",
           startDay: startDate.day || "",
           startDate: `${startDate?.date} from: ${startDate?.time}`,
           endDate: `${endDate?.timezone}`,
+          permalink: item?.permalink || "",
           venue: config?.organizer?.shortName || "",
           templateName: "event",
         };
@@ -667,14 +297,19 @@ const
         if (blogWrapper && blogWrapper instanceof Node) {
           blogWrapper.addEventListener("click", (e) => {
             // Check if the clicked element (or its parent) has the data-tickets attribute
-            const ticketBtn = e.target.closest("[data-tickets]");
-            const bookBtn = e.target.closest("[data-book]");
-            if (ticketBtn) __blogPopups(e, "tickets", ticketBtn.closest(".__template").id, {
-                ...(config && typeof config === "object" ? config : {}),
-            });
-            if (bookBtn) __blogPopups(e, "booking", bookBtn.closest(".__template").id, {
-              ...(config && typeof config === "object" ? config : {}),
-            });
+            const btn = e.target.closest("[data-id]");
+            if (btn && btn.classList.contains("__tickets")) {
+              createTicketPopup(
+                btn.dataset.id,
+                {...(config && typeof config === "object" ? config : {})},
+              );
+            }
+            if (btn && btn.classList.contains("__book")) {
+              createBookingPopup(
+                btn.dataset.id,
+                {...(config && typeof config === "object" ? config : {})}
+              );
+            }
           });
         }
       };

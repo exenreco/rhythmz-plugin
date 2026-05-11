@@ -211,7 +211,7 @@
   display: none;
   z-index: 10001;
   max-width: 500px;
-  max-height: 220px;
+  max-height: 320px;
   min-height: 180px;
   visibility: hidden;
   background: #111;
@@ -240,13 +240,33 @@
   flex: 0 0 auto;
   max-width: 100%;
   min-width: 100%;
+  padding: 5px 0px;
   max-height: none;
   min-height: none;
-  border-radius: 8px;
+  border-radius: 0px;
   align-items: center;
   flex-direction: row;
   justify-items: center;
-  justify-content: right;
+  justify-content: space-between;
+  background-color: transparent;
+  border-bottom: 0.5px solid #333;
+}
+.__venue.map .__cart .__toolbar.cart .__cart_title {
+  height: auto;
+  display: flex;
+  flex: 0 0 auto;
+  margin: 0px 5px;
+  max-width: none;
+  min-width: none;
+  max-height: none;
+  min-height: none;
+  font-weight: 400;
+  align-items: left;
+  font-size: 1.2rem;
+  flex-direction: row;
+  justify-items: left;
+  justify-content: left;
+  width: calc(100% - 2.5em);
   background-color: transparent;
 }
 .__venue.map .__cart .__toolbar.cart .__btn.__close {
@@ -254,6 +274,7 @@
   opacity: 1;
   height: 2em;
   display: flex;
+  margin: 0px 5px;
   cursor: pointer;
   flex-direction: row;
   align-items: center;
@@ -265,7 +286,6 @@
 }
 .__venue.map .__cart .__toolbar.cart .__btn.__close:hover {
   opacity: 0.5;
-  transform: rotate(90deg);
 }
 .__venue.map .__cart .__message {
   gap: 0px;
@@ -301,6 +321,7 @@
   color: orange;
 }
 .__venue.map .__cart .__contents {
+  gap: 5px;
   width: 98%;
   margin: auto;
   height: auto;
@@ -309,6 +330,82 @@
   justify-items: left;
   justify-content: left;
   flex-direction: column;
+}
+.__venue.map .__cart .__contents .__item_name {
+  width: 98%;
+  margin: auto;
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  font-weight: 600;
+  text-align: left;
+  line-height: 1rem;
+  align-items: start;
+  font-size: 0.985rem;
+  justify-items: left;
+  flex-direction: row;
+  justify-content: left;
+}
+.__venue.map .__cart .__contents .__item_details {
+  width: 98%;
+  margin: auto;
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  font-weight: 200;
+  text-align: left;
+  line-height: 1rem;
+  align-items: start;
+  font-size: 0.785rem;
+  justify-items: left;
+  flex-direction: row;
+  justify-content: left;
+  color: #949494;
+}
+.__venue.map .__cart .__contents .__labels,
+.__venue.map .__cart .__contents .__fields {
+  width: 98%;
+  margin: auto;
+  display: flex;
+  flex: 0 0 auto;
+  text-align: left;
+  line-height: 1rem;
+  flex-wrap: nowrap;
+  align-items: start;
+  font-size: 0.985rem;
+  justify-items: left;
+  flex-direction: row;
+  justify-content: left;
+}
+.__venue.map .__cart .__contents .__labels .__label,
+.__venue.map .__cart .__contents .__fields .__field {
+  margin: 1px;
+  padding: 0px;
+}
+.__venue.map .__cart .__contents .__labels .__label {
+  margin-top: 10px;
+  font-size: 0.852rem;
+  color: #949494;
+}
+.__venue.map .__cart .__contents .__fields .__field {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.__venue.map .__cart .__contents .__labels .__label.__quantity,
+.__venue.map .__cart .__contents .__fields .__field.__quantity{
+  width: 25%;
+}
+.__venue.map .__cart .__contents .__labels .__label.__multiplier,
+.__venue.map .__cart .__contents .__fields .__field.__multiplier{
+  width: 15%;
+}
+.__venue.map .__cart .__contents .__labels .__label.__price,
+.__venue.map .__cart .__contents .__fields .__field.__price{
+  width: 30%;
+}
+.__venue.map .__cart .__contents .__labels .__label.__total,
+.__venue.map .__cart .__contents .__fields .__field.__total{
+  width: 30%;
 }
 .__venue.map .__cart .__contents .__btn_container,
 .__venue.map .__cart .__contents .cart-info {

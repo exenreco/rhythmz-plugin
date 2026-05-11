@@ -52,10 +52,45 @@ function createUpdater(sampleEl, key) {
       el.style.display = isValid ? "none" : "block";
     }
 
+    // --- Anchor Logic ---
+    else if (tag === "A") {
+      if (key === "href" || key === "permalink") {
+        const href = v && String(v).trim().length > 0 ? v : "#";
+
+        if (el.getAttribute("href") !== href) {
+          el.setAttribute("href", href);
+        }
+      } else {
+        const val = v == null ? "" : String(v);
+        if (el.textContent !== val) el.textContent = val;
+      }
+    }
+
     // --- Default Text Logic ---
     else {
       const val = v == null ? "" : String(v);
-      if (el.textContent !== val) el.textContent = val;
+      // If the key exists as a dataset binding,
+      // ONLY sync dataset
+      if (key in el.dataset) {
+        if (el.dataset[key] !== val) {
+          el.dataset[key] = val;
+        }
+
+        // IMPORTANT:
+        // only use textContent if element
+        // has no existing visible text
+        // OR is intended as text binding
+        const isTextBinding =
+          el.childNodes.length === 0 ||
+          el.textContent.trim() === "";
+
+        if (!isTextBinding) return;
+      }
+
+      // Otherwise treat as text binding
+      if (el.textContent !== val) {
+        el.textContent = val;
+      }
     }
   };
 }

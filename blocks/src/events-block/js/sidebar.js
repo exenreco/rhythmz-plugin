@@ -1718,11 +1718,11 @@ export const Sidebar = ({ attributes, setAttributes }) => {
             />
             <SelectControl
               label="Events layout"
-              value={attributes?.events?.layout || "grid"}
+              value={attributes?.events?.layout || "blog"}
               __next40pxDefaultSize={true}
               __nextHasNoMarginBottom={true}
               options={[
-                { label: "Grid", value: "grid" },
+                { label: "Blog", value: "blog" },
                 { label: "Carousel", value: "carousel" },
               ]}
               onChange={(value) =>

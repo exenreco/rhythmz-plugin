@@ -163,7 +163,7 @@ const isFontAwesomeAvailable = async () => {
       width: 100%;
       position: relative;
       line-height: 1.2rem;
-      border-bottom: 1px solid #eee; 
+      border-bottom: 0.5px solid #444444; 
       color: var(--wp--preset--color--ui-text, #fff);
       background: var(--wp--preset--color--ui-header-background, #333); 
     }
@@ -173,7 +173,6 @@ const isFontAwesomeAvailable = async () => {
       display: flex; 
       align-items: center;
       justify-content: space-between;
-      background: blue;
     }
     .__toolbar .__wrapper .__text {
       padding: 5px;
@@ -191,12 +190,13 @@ const isFontAwesomeAvailable = async () => {
       height: 100%;
       border: none; 
       cursor: pointer; 
-      font-size: 0.7rem;
-      background: #e0e0e0;
       width: calc(8em);
+      font-size: 0.7rem;
+      line-height: 0.9rem;
+      background: rgba(255,0,0,1);
     }
     .__toolbar .__wrapper .__action i {
-      font-size: 1.82rem;
+      font-size: 1.02rem;
     }
     .__article {
       flex: 1; /* Allows it to grow in flex containers */
